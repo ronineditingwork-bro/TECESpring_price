@@ -59,6 +59,11 @@ td.sku, th.sku { white-space: nowrap; color: var(--muted); font-size: 13px; }
 tfoot td { font-weight: 600; border-bottom: 0; }
 .actions { display: flex; gap: 8px; margin-top: 12px; }
 .print-only { display: none; }
+.pick { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.pick[hidden] { display: none; }
+.seller { font-size: 12px; line-height: 1.5; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+tfoot .vat td { font-weight: 400; color: var(--muted); padding-top: 0; }
+.sign { margin-top: 40px; }
 
 nav { position: fixed; left: 0; right: 0; bottom: 0; display: flex; background: var(--bg); border-top: 1px solid var(--line);
   padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
@@ -84,9 +89,10 @@ nav a.active { color: var(--accent); }
   :root { --bg: #fff; --fg: #000; --muted: #444; --line: #bbb; }
   header, nav, #catalog, #card, .no-print, #empty { display: none !important; }
   body { padding: 0; }
-  main { padding: 0; max-width: none; }
+  main { display: block; padding: 0; max-width: none; }
   #cart { display: block !important; position: static; max-height: none; overflow: visible; background: none; padding: 0; }
   .print-only { display: block; }
   td.sku, th.sku { display: table-cell; }
   input[type=number] { border: 0; width: 3em; padding: 0; }
+  #cart-rows td:nth-child(3) { white-space: nowrap; }
 }

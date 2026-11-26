@@ -11,6 +11,10 @@ const bySku = new Map(sections.flatMap((s) => s.items.map((i) => [i.sku, i])));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const $ = (id) => document.getElementById(id);
 
+const SELLERS = window.SELLERS || [];
+let sellerIdx = 0;
+try { sellerIdx = Math.min(Number(localStorage.getItem("tecespring-seller")) || 0, SELLERS.length - 1); } catch {}
+
 let cart = {};
 try { cart = JSON.parse(localStorage.getItem("tecespring-cart")) || {}; } catch {}
 for (const sku of Object.keys(cart)) if (!bySku.has(sku)) delete cart[sku]; // позиция ушла из нового прайса
@@ -79,6 +83,9 @@ function renderCart() {
       <td class="no-print"><button type="button" class="secondary" data-del="${esc(r.sku)}" aria-label="Удалить">×</button></td></tr>`)
     .join("");
   $("total").textContent = rub.format(total);
+  const vat = SELLERS[sellerIdx]?.vatRate || 0;
+  $("vat-label").textContent = vat ? `В том числе НДС (${vat}%)` : "Без НДС";
+  $("vat").textContent = vat ? rub.format(Math.round(total * vat / (100 + vat) * 100) / 100) : "";
   $("empty").hidden = rows.length > 0;
   $("cart-sum").textContent = rows.length ? `· ${rub.format(total)} ₽` : "";
   const q = $("card-qty");
@@ -104,6 +111,19 @@ function route() {
   }
   $("nav-catalog").classList.toggle("active", view !== "cart");
   $("nav-cart").classList.toggle("active", view === "cart");
+  renderCart();
+}
+
+function renderSeller() {
+  const s = SELLERS[sellerIdx];
+  $("seller-pick").hidden = SELLERS.length < 2;
+  $("seller-select").innerHTML = SELLERS.map((x, n) => `<option value="${n}"${n === sellerIdx ? " selected" : ""}>${esc(x.name)}</option>`).join("");
+  $("seller").innerHTML = s ? `<b>Поставщик: ${esc(s.fullName || s.name)}</b><br>
+    ИНН ${esc(s.inn)}${s.kpp ? `, КПП ${esc(s.kpp)}` : ""}, ${s.kpp ? "ОГРН" : "ОГРНИП"} ${esc(s.ogrn)}${s.okpo ? `, ОКПО ${esc(s.okpo)}` : ""}<br>
+    Юридический адрес: ${esc(s.address)}${s.office ? `<br>Фактический адрес: ${esc(s.office)}` : ""}<br>
+    Тел.: ${esc(s.phone)}${s.email ? `, e-mail: ${esc(s.email)}` : ""}<br>
+    Р/с ${esc(s.account)} в ${esc(s.bank)}, БИК ${esc(s.bik)}, к/с ${esc(s.ks)}` : "";
+  $("sign").textContent = s ? `${s.directorTitle || "Руководитель"} ______________________ ${s.director || ""}` : "";
   renderCart();
 }
 
@@ -137,8 +157,14 @@ $("print").addEventListener("click", () => {
   else window.print();
 });
 $("clear").addEventListener("click", () => { cart = {}; save(); });
+$("seller-select").addEventListener("change", (e) => {
+  sellerIdx = Number(e.target.value);
+  try { localStorage.setItem("tecespring-seller", sellerIdx); } catch {}
+  renderSeller();
+});
 addEventListener("hashchange", route);
 wide.addEventListener("change", route); // сложили или разложили телефон
 
 renderList();
+renderSeller();
 route();

@@ -30,14 +30,18 @@
   <section id="card" hidden></section>
 
   <section id="cart" hidden>
+    <div class="print-only seller" id="seller"></div>
     <h2>Коммерческое предложение</h2>
     <p class="print-only" id="quote-date"></p>
+    <label class="no-print pick" id="seller-pick">Поставщик <select id="seller-select"></select></label>
     <table>
       <thead><tr><th class="sku">Артикул</th><th>Наименование</th><th>Кол-во</th><th class="num">Цена, ₽</th><th class="num">Сумма, ₽</th><th class="no-print"></th></tr></thead>
       <tbody id="cart-rows"></tbody>
-      <tfoot><tr><td class="sku"></td><td colspan="3">Итого, с НДС</td><td id="total" class="num">0</td><td class="no-print"></td></tr></tfoot>
+      <tfoot><tr><td class="sku"></td><td colspan="3">Итого</td><td id="total" class="num">0</td><td class="no-print"></td></tr>
+        <tr class="vat"><td class="sku"></td><td colspan="3" id="vat-label"></td><td id="vat" class="num"></td><td class="no-print"></td></tr></tfoot>
     </table>
     <p id="empty">Добавьте товары из каталога.</p>
+    <p class="print-only sign" id="sign"></p>
     <div class="actions no-print">
       <button id="print" type="button">Печать / PDF</button>
       <button id="clear" type="button" class="secondary">Очистить</button>
@@ -53,6 +57,7 @@
 <script src="price.js"></script>
 <script src="catalog.js"></script>
 <script src="stock.js"></script>
+<script src="sellers.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

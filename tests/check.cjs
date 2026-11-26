@@ -50,6 +50,10 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.screenshot({ path: shot('list') });
   await p.emulateMedia({ media: 'print' }); await p.setViewportSize({ width: 800, height: 600 });
   assert.ok(await p.isVisible('#cart-rows'), 'print shows the quote from any screen');
+  assert.ok(await p.evaluate(() => document.getElementById('cart').offsetWidth > innerWidth * 0.9), 'print: quote uses the full page width');
+  assert.match(await p.textContent('#seller'), /ИНН 2308293988, КПП 616601001/, 'print: seller requisites');
+  assert.equal((await p.textContent('#vat')).replace(/\s/g, ''), '9326,45', 'print: VAT 22% included');
+  assert.match(await p.textContent('#sign'), /Директор .* Казачков А\. В\./);
   await p.screenshot({ path: shot('print') });
 
   // Z Fold 7 разложен: каталог и карточка рядом, складывание возвращает один экран
