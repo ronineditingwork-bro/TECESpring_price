@@ -15,11 +15,11 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   assert.equal(await p.locator('.items li').count(), total);
 
   // остатки: фильтр «Только в наличии» и подпись у товара
-  const inStock = await p.evaluate(() => window.PRICE.sections.flatMap((s) => s.items).filter((i) => window.STOCK.items[i.sku] > 0).length);
+  const inStock = await p.evaluate(() => window.PRICE.sections.flatMap((s) => s.items).filter((i) => window.STOCK.stores.some((s) => s.items[i.sku] > 0)).length);
   await p.check('#in-stock');
   assert.equal(await p.locator('.items li').count(), inStock);
   await p.uncheck('#in-stock');
-  assert.match(await p.textContent('a[href="#p=S710001"]'), /в наличии: 20 шт/);
+  assert.match(await p.textContent('a[href="#p=S710001"]'), /Краснодар: 20 · Москва: 577 шт/);
 
   await p.fill('#q', 'S710001');
   assert.equal(await p.locator('.items li').count(), 1);

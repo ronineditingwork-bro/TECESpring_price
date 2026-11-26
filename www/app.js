@@ -1,8 +1,12 @@
 const { title, rate, sections } = window.PRICE;
 const CATALOG = window.CATALOG || {};
-const STOCK = window.STOCK || { date: "", items: {} };
-const stock = (sku) => STOCK.items[sku] || 0; // нет в выгрузке — нет в наличии
-const stockLabel = (i) => stock(i.sku) > 0 ? `в наличии: ${stock(i.sku)} ${i.unit}` : "нет в наличии";
+const STORES = window.STOCK?.stores || []; // склады: Краснодар, Москва
+const qty = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 });
+const stock = (sku) => STORES.reduce((n, s) => n + (s.items[sku] || 0), 0); // нет в выгрузке — нет на складе
+const stockLabel = (i) => stock(i.sku) > 0
+  ? STORES.map((s) => `${s.name}: ${qty.format(s.items[i.sku] || 0)}`).join(" · ") + ` ${i.unit}`
+  : "нет в наличии";
+const stockDates = STORES.map((s) => `${s.name} на ${s.date}`).join(", ");
 const bySku = new Map(sections.flatMap((s) => s.items.map((i) => [i.sku, i])));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const $ = (id) => document.getElementById(id);
@@ -54,7 +58,8 @@ function renderCard(sku) {
     <p class="sku">Артикул ${esc(i.sku)}</p>
     <h2>${esc(i.name)}</h2>
     <p class="price">${rub.format(i.rub)} ₽ <small>${i.eur} € за ${esc(i.unit)}</small></p>
-    <p class="${stock(i.sku) > 0 ? "ok" : "out"}">${esc(stockLabel(i))}${STOCK.date ? ` (остатки на ${esc(STOCK.date)})` : ""}</p>
+    <p class="${stock(i.sku) > 0 ? "ok" : "out"}">${esc(stockLabel(i))}</p>
+    ${STORES.length ? `<p class="muted">Остатки: ${esc(stockDates)}</p>` : ""}
     <button type="button" data-add="${esc(i.sku)}">В корзину</button>
     <span class="in-cart" id="card-qty" data-sku="${esc(i.sku)}"></span>
     ${c.text ? `<div class="text">${esc(c.text)}</div>` : ""}
@@ -69,7 +74,7 @@ function renderCart() {
   const total = rows.reduce((t, r) => t + Math.round(r.rub * r.qty * 100) / 100, 0);
   $("cart-rows").innerHTML = rows
     .map((r) => `<tr><td class="sku">${esc(r.sku)}</td><td>${esc(r.name)}</td>
-      <td><input type="number" min="1" step="1" inputmode="numeric" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"> ${esc(r.unit)}${r.qty > stock(r.sku) ? `<small class="out no-print">в наличии: ${stock(r.sku)}</small>` : ""}</td>
+      <td><input type="number" min="1" step="1" inputmode="numeric" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"> ${esc(r.unit)}${r.qty > stock(r.sku) ? `<small class="out no-print">на складах: ${qty.format(stock(r.sku))}</small>` : ""}</td>
       <td class="num">${rub.format(r.rub)}</td><td class="num">${rub.format(r.rub * r.qty)}</td>
       <td class="no-print"><button type="button" class="secondary" data-del="${esc(r.sku)}" aria-label="Удалить">×</button></td></tr>`)
     .join("");
@@ -107,7 +112,7 @@ function quoteHtml() {
     <body><main>${$("cart").outerHTML}</main></body></html>`;
 }
 
-$("meta").textContent = `${title} · 1 EUR = ${rate} ₽${STOCK.date ? ` · остатки на ${STOCK.date}` : ""}`;
+$("meta").textContent = `${title} · 1 EUR = ${rate} ₽${STORES.length ? ` · остатки: ${stockDates}` : ""}`;
 $("quote-date").textContent = `${title}. Дата: ${new Date().toLocaleDateString("ru-RU")}`;
 for (const s of sections) $("section").add(new Option(s.name, s.name));
 $("q").addEventListener("input", renderList);
