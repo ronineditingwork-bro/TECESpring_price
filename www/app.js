@@ -1,16 +1,19 @@
 const { title, rate, sections } = window.PRICE;
 const CATALOG = window.CATALOG || {};
-const STORES = window.STOCK?.stores || []; // склады: Краснодар, Москва
-const qty = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 });
-const stock = (sku) => STORES.reduce((n, s) => n + (s.items[sku] || 0), 0); // нет в выгрузке — нет на складе
-const stockLabel = (i) => stock(i.sku) > 0
-  ? STORES.map((s) => `${s.name}: ${qty.format(s.items[i.sku] || 0)}`).join(" · ") + ` ${i.unit}`
-  : "нет в наличии";
-const stockDates = STORES.map((s) => `${s.name} на ${s.date}`).join(", ");
+const STORES = window.STOCK?.stores || []; // склады: Ростов-на-Дону, Москва
 const bySku = new Map(sections.flatMap((s) => s.items.map((i) => [i.sku, i])));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const num = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 });
 const $ = (id) => document.getElementById(id);
 const DOCS = { quote: "Коммерческое предложение", invoice: "Счёт на оплату" };
+const ICON = {
+  plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4"/></svg>',
+};
+
+const stock = (sku) => STORES.reduce((n, s) => n + (s.items[sku] || 0), 0); // нет в выгрузке — нет на складе
+const city = (name) => name.split("-")[0]; // «Ростов-на-Дону» → «Ростов» там, где мало места
+const img = (sku) => CATALOG[sku]?.images[0] || "";
 
 // localStorage может быть недоступен (приватный режим) — тогда приложение просто ничего не запоминает
 const store = {
@@ -20,9 +23,10 @@ const store = {
 
 let cart = store.get("cart", {});
 for (const sku of Object.keys(cart)) if (!bySku.has(sku)) delete cart[sku]; // позиция ушла из нового прайса
+let section = "";
 
 function esc(s) {
-  return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  return String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 }
 
 function toast(text) {
@@ -30,79 +34,147 @@ function toast(text) {
   t.textContent = text;
   t.classList.add("on");
   clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => t.classList.remove("on"), 3500);
+  toast.timer = setTimeout(() => t.classList.remove("on"), 2600);
 }
 
 function save() {
   store.set("cart", cart);
-  renderCart();
+  const n = Object.keys(cart).length;
+  for (const id of ["badge", "badge-top"]) { $(id).hidden = !n; $(id).textContent = n; }
 }
 
-function thumb(sku) {
-  const img = CATALOG[sku]?.images[0];
-  return img ? `<img src="${esc(img)}" alt="" loading="lazy">` : `<span class="noimg"></span>`;
+function add(sku, n = 1) {
+  cart[sku] = (cart[sku] || 0) + n;
+  save();
+  for (const id of ["badge", "badge-top"]) { $(id).classList.remove("bump"); void $(id).offsetWidth; $(id).classList.add("bump"); }
+  const i = bySku.get(sku);
+  toast(`Добавлено: ${i.name.length > 42 ? i.name.slice(0, 40) + "…" : i.name}. В корзине ${cart[sku]} ${i.unit}`);
+}
+
+function stockLine(sku) {
+  if (!STORES.length) return "";
+  if (!stock(sku)) return '<div class="stock"><span>Нет на складах</span></div>';
+  return `<div class="stock">${STORES.map((s) => { const n = s.items[sku] || 0; return `<span class="${n > 0 ? "y" : ""}">${esc(city(s.name))} <b>${num.format(n)}</b></span>`; }).join("")}</div>`;
+}
+
+// ---------- каталог ----------
+function renderTabs() {
+  const tabs = [["", "Все товары"], ...sections.map((s) => [s.name, s.name])];
+  $("tabs").innerHTML = tabs.map(([v, l]) => `<button type="button" role="tab" data-tab="${esc(v)}" aria-selected="${v === section}">${esc(l)}</button>`).join("");
 }
 
 function renderList() {
   const q = $("q").value.trim().toLowerCase();
-  const sec = $("section").value;
   const onlyStock = $("in-stock").checked;
   $("list").innerHTML = sections
-    .filter((s) => !sec || s.name === sec)
+    .filter((s) => !section || s.name === section)
     .map((s) => {
       const items = s.items.filter((i) => (!q || i.name.toLowerCase().includes(q) || i.sku.toLowerCase().includes(q)) && (!onlyStock || stock(i.sku) > 0));
       if (!items.length) return "";
-      return `<h2>${esc(s.name)}</h2><ul class="items">${items
-        .map((i) => `<li><a class="item" href="#p=${encodeURIComponent(i.sku)}">${thumb(i.sku)}
-          <span class="name">${esc(i.name)}<small>${esc(i.sku)} · <span class="${stock(i.sku) > 0 ? "ok" : "out"}">${esc(stockLabel(i))}</span></small></span>
-          <span class="num">${rub.format(i.rub)} ₽<small>${i.eur} € / ${esc(i.unit)}</small></span></a>
-          <button type="button" data-add="${esc(i.sku)}" aria-label="В корзину: ${esc(i.name)}">+</button></li>`)
-        .join("")}</ul>`;
+      return `<h2>${esc(s.name)}</h2><div class="grid">${items.map((i) => `
+        <article class="tile">
+          <a href="#p=${encodeURIComponent(i.sku)}" data-sku="${esc(i.sku)}">
+            <div class="ph">${img(i.sku) ? `<img src="${esc(img(i.sku))}" alt="" loading="lazy">` : '<span class="noimg"></span>'}</div>
+            <div class="body">
+              <span class="name">${esc(i.name)}</span>
+              <span class="sku">${esc(i.sku)}</span>
+              ${stockLine(i.sku)}
+              <span class="price">${rub.format(i.rub)} ₽</span>
+            </div>
+          </a>
+          <button type="button" class="add" data-add="${esc(i.sku)}" aria-label="В корзину: ${esc(i.name)}">${ICON.plus}</button>
+        </article>`).join("")}</div>`;
     })
-    .join("") || "<p>Ничего не найдено.</p>";
+    .join("") || `<div class="empty">Ничего не найдено. Проверьте артикул или выберите «Все товары».</div>`;
 }
 
+// ---------- карточка товара ----------
 function renderCard(sku) {
   const i = bySku.get(sku);
   if (!i) return false;
   const c = CATALOG[sku] || { images: [], text: "", docs: [] };
+  const slides = c.images.length ? c.images.map((src, n) => `<div class="ph"><img src="${esc(src)}" alt="${n ? "" : esc(i.name)}"></div>`).join("") : '<div class="ph"><span class="noimg"></span></div>';
   $("card").innerHTML = `
-    <a href="#" class="back" data-back>← Назад</a>
-    <div class="gallery">${c.images.map((src) => `<img src="${esc(src)}" alt="${esc(i.name)}">`).join("") || '<span class="noimg big"></span>'}</div>
-    <p class="sku">Артикул ${esc(i.sku)}</p>
-    <h2>${esc(i.name)}</h2>
-    <p class="price">${rub.format(i.rub)} ₽ <small>${i.eur} € за ${esc(i.unit)}</small></p>
-    <p class="${stock(i.sku) > 0 ? "ok" : "out"}">${esc(stockLabel(i))}</p>
-    ${STORES.length ? `<p class="muted">Остатки: ${esc(stockDates)}</p>` : ""}
-    <button type="button" data-add="${esc(i.sku)}">В корзину</button>
-    <span class="in-cart" id="card-qty" data-sku="${esc(i.sku)}"></span>
-    ${c.text ? `<div class="text">${esc(c.text)}</div>` : ""}
-    ${c.docs.length ? `<h3>Документы</h3><ul class="docs">${c.docs.map((d) => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.name)}</a></li>`).join("")}</ul>` : ""}
-    ${c.url ? `<p><a href="${esc(c.url)}" target="_blank" rel="noopener">Страница на spring.tececatalog.ru</a></p>` : ""}`;
+    <div class="gallery" id="gal">${slides}</div>
+    <div class="dots" id="gdots"></div>
+    <div class="panel" style="margin-top:12px">
+      <p class="sku-line">Артикул ${esc(i.sku)}</p>
+      <h1 class="title">${esc(i.name)}</h1>
+      <p class="bigprice">${rub.format(i.rub)} ₽<small>${num.format(i.eur)} € за ${esc(i.unit)}, с НДС</small></p>
+      ${STORES.length ? `<div class="wh">${STORES.map((s) => { const n = s.items[sku] || 0; return `<div>${esc(s.name)}<b class="${n > 0 ? "" : "no"}">${n > 0 ? `${num.format(n)} ${esc(i.unit)}` : "нет"}</b><small>на ${esc(s.date)}</small></div>`; }).join("")}</div>` : ""}
+      <div class="buy">
+        <span class="stepper"><button type="button" data-step="-1" aria-label="Меньше">−</button><input id="addQty" type="number" inputmode="numeric" min="1" value="1" aria-label="Количество, ${esc(i.unit)}"><button type="button" data-step="1" aria-label="Больше">+</button></span>
+        <button type="button" class="btn" id="addBtn">В корзину</button>
+      </div>
+      <p class="incart" id="card-qty">${cart[sku] ? `В корзине ${cart[sku]} ${esc(i.unit)}` : ""}</p>
+    </div>
+    ${c.text ? `<div class="panel"><h3>Описание</h3><div class="desc">${esc(c.text.replace(/\n\s*\n/g, "\n"))}</div></div>` : ""}
+    ${c.docs.length || c.url ? `<div class="panel"><h3>Документация</h3><ul class="docs">
+      ${c.docs.map((d) => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${ICON.pdf}${esc(d.name)}</a></li>`).join("")}
+      ${c.url ? `<li><a href="${esc(c.url)}" target="_blank" rel="noopener">Страница товара на spring.tececatalog.ru</a></li>` : ""}
+    </ul></div>` : ""}`;
+  const q = $("addQty");
+  $("card").querySelectorAll("[data-step]").forEach((b) => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.step); });
+  $("addBtn").onclick = () => {
+    add(sku, Math.max(1, parseInt(q.value) || 1));
+    $("card-qty").textContent = `В корзине ${cart[sku]} ${i.unit}`;
+  };
+  $("gal").onscroll = dots;
+  dots();
   return true;
 }
 
+function dots() {
+  const g = $("gal");
+  if (!g) return;
+  const n = g.children.length, cur = Math.round(g.scrollLeft / (g.clientWidth || 1));
+  $("gdots").innerHTML = n > 1 ? Array.from({ length: n }, (_, k) => `<i class="${k === cur ? "on" : ""}"></i>`).join("") : "";
+}
+
+// ---------- корзина ----------
 const cartLines = () => Object.entries(cart).map(([sku, n]) => ({ ...bySku.get(sku), qty: n }));
 // сумма по каждой строке округляется до копеек, как в счёте
 const cartTotal = () => cartLines().reduce((t, r) => t + Math.round(r.rub * r.qty * 100) / 100, 0);
 
 function renderCart() {
-  const rows = cartLines(), total = cartTotal();
-  $("cart-rows").innerHTML = rows
-    .map((r) => `<tr><td class="sku">${esc(r.sku)}</td><td>${esc(r.name)}</td>
-      <td><input type="number" min="1" step="1" inputmode="numeric" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"> ${esc(r.unit)}${r.qty > stock(r.sku) ? `<small class="out">на складах: ${qty.format(stock(r.sku))}</small>` : ""}</td>
-      <td class="num">${rub.format(r.rub)}</td><td class="num">${rub.format(r.rub * r.qty)}</td>
-      <td><button type="button" class="secondary" data-del="${esc(r.sku)}" aria-label="Удалить">×</button></td></tr>`)
-    .join("");
-  $("total").textContent = rub.format(total);
-  $("empty").hidden = rows.length > 0;
-  $("cart-table").hidden = $("cart-actions").hidden = !rows.length;
-  $("cart-sum").textContent = rows.length ? `· ${rub.format(total)} ₽` : "";
-  const q = $("card-qty");
-  if (q) q.textContent = cart[q.dataset.sku] ? `в корзине: ${cart[q.dataset.sku]}` : "";
+  const rows = cartLines();
+  if (!rows.length) {
+    $("cart").innerHTML = `<div class="panel empty">Корзина пуста. Добавьте товары кнопкой «+» на карточке, и из них можно будет сделать КП или счёт.<br><a class="btn" href="#">Открыть каталог</a></div>`;
+    return;
+  }
+  $("cart").innerHTML = `
+    <div class="panel">${rows.map((r) => `
+      <div class="line">
+        <a class="ph" href="#p=${encodeURIComponent(r.sku)}">${img(r.sku) ? `<img src="${esc(img(r.sku))}" alt="">` : '<span class="noimg"></span>'}</a>
+        <div>
+          <a class="t" href="#p=${encodeURIComponent(r.sku)}">${esc(r.name)}<small>${esc(r.sku)}, ${rub.format(r.rub)} ₽ за ${esc(r.unit)}</small></a>
+          <div class="ctl">
+            <span class="stepper sm"><button type="button" data-dec="${esc(r.sku)}" aria-label="Меньше">−</button><input type="number" inputmode="numeric" min="1" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"><button type="button" data-inc="${esc(r.sku)}" aria-label="Больше">+</button></span>
+            <span class="sum">${rub.format(r.rub * r.qty)} ₽</span>
+          </div>
+          ${r.qty > stock(r.sku) ? `<div class="warn">На складах ${num.format(stock(r.sku))} ${esc(r.unit)}</div>` : ""}
+        </div>
+      </div>`).join("")}
+    </div>
+    <div class="panel summary">
+      <div class="row"><span>Позиций</span><span>${rows.length}</span></div>
+      <div class="tot"><span>Итого с НДС</span><b>${rub.format(cartTotal())} ₽</b></div>
+      <button type="button" class="btn full" data-go="doc/quote">Коммерческое предложение</button>
+      <button type="button" class="btn ghost full" data-go="doc/invoice">Счёт на оплату</button>
+      <button type="button" class="linkbtn" id="clear">Очистить корзину</button>
+    </div>`;
+  $("clear").onclick = () => { if (confirm("Очистить корзину?")) { cart = {}; save(); renderCart(); } };
 }
 
-// «Коммерческое предложение» или «Счёт на оплату» — та же форма, что в WHITECROSS и MAPEI: продавец, номер, клиент, «Создать PDF»
+function setQty(sku, n) {
+  if (n >= 1) cart[sku] = n; else delete cart[sku];
+  save();
+  const y = $("cart").scrollTop, wy = scrollY;
+  renderCart();
+  $("cart").scrollTop = y; scrollTo(0, wy);
+}
+
+// ---------- КП и счёт: форма как в WHITECROSS и MAPEI — продавец, номер, клиент, «Создать PDF» ----------
 function renderDoc(kind) {
   if (!DOCS[kind] || !Object.keys(cart).length) return false;
   const si = Math.min(store.get("seller", 0), SELLERS.length - 1);
@@ -110,30 +182,35 @@ function renderDoc(kind) {
   const opts = store.get("docOpts", { photos: true, arts: true });
   const b = store.get("buyer", {});
   const n = Object.keys(cart).length;
-  const field = (id, label, type = "text", mode = "") => `<label for="b_${id}">${label}</label><input id="b_${id}" type="${type}" ${mode ? `inputmode="${mode}"` : ""} value="${esc(b[id] || "")}">`;
-  const sw = (id, t, sub) => `<label class="switch"><span>${t}<small>${sub}</small></span><input type="checkbox" id="o_${id}" ${opts[id] ? "checked" : ""}></label>`;
+  const field = (id, label, type = "text", mode = "") => `<label class="f" for="b_${id}">${label}</label><input id="b_${id}" type="${type}" ${mode ? `inputmode="${mode}"` : ""} value="${esc(b[id] || "")}">`;
+  const sw = (id, t, sub) => `<label class="switch toggle"><span>${t}<small>${sub}</small></span><input type="checkbox" id="o_${id}" ${opts[id] ? "checked" : ""}></label>`;
   $("doc").innerHTML = `
-    <a href="#cart" class="back">← Корзина</a>
-    <h2>${DOCS[kind]}</h2>
-    <p class="muted">${n} ${n === 1 ? "позиция" : n < 5 ? "позиции" : "позиций"} на ${rub.format(cartTotal())} ₽</p>
-    <div class="form">
-      <label for="seller">Продавец</label>
+    <div class="panel">
+      <h1 class="title">${DOCS[kind]}</h1>
+      <p class="muted">${n} ${n === 1 ? "позиция" : n < 5 ? "позиции" : "позиций"} на ${rub.format(cartTotal())} ₽</p>
+    </div>
+    <div class="panel form">
+      <label class="f" for="seller">Продавец</label>
       <select id="seller">${SELLERS.map((s, i) => `<option value="${i}" ${i === si ? "selected" : ""}>${s.kpp ? "" : "ИП "}${esc(s.short)}, ${s.vatRate ? "НДС " + s.vatRate + "%" : "без НДС"}</option>`).join("")}</select>
       <div class="two">
-        <div><label for="docNo">Номер</label><input id="docNo" type="number" inputmode="numeric" min="1" value="${store.get(noKey(si), 1)}"></div>
-        <div><label for="docDate">Дата</label><input id="docDate" type="date" value="${new Date().toLocaleDateString("sv")}"></div>
+        <div><label class="f" for="docNo">Номер</label><input id="docNo" type="number" inputmode="numeric" min="1" value="${store.get(noKey(si), 1)}"></div>
+        <div><label class="f" for="docDate">Дата</label><input id="docDate" type="date" value="${new Date().toLocaleDateString("sv")}"></div>
       </div>
-      ${kind === "quote" ? `<label for="valid">Срок действия, дней</label><input id="valid" type="number" inputmode="numeric" min="1" value="${store.get("validDays", 14)}">` : ""}
+      ${kind === "quote" ? `<label class="f" for="valid">Срок действия, дней</label><input id="valid" type="number" inputmode="numeric" min="1" value="${store.get("validDays", 14)}">` : ""}
+    </div>
+    <div class="panel form">
       ${sw("photos", "Фото товаров", "Картинка у каждой позиции")}
       ${sw("arts", "Артикулы", "Выключите, чтобы клиент не видел артикулы")}
+    </div>
+    <div class="panel form">
       <h3>${kind === "quote" ? "Клиент" : "Покупатель"}</h3>
       ${field("name", "Имя или компания")}
       <div class="two"><div>${field("inn", "ИНН", "text", "numeric")}</div><div>${field("kpp", "КПП", "text", "numeric")}</div></div>
       ${field("address", "Адрес")}
       ${field("phone", "Телефон", "tel")}
-      <label for="b_comment">Комментарий в начале документа</label><textarea id="b_comment" rows="3">${esc(store.get("docComment", ""))}</textarea>
-      <button type="button" class="full" id="pdfBtn">Создать PDF</button>
-    </div>`;
+      <label class="f" for="b_comment">Комментарий в начале документа</label><textarea id="b_comment" rows="3">${esc(store.get("docComment", ""))}</textarea>
+    </div>
+    <div class="doc-cta"><button type="button" class="btn full" id="pdfBtn">Создать PDF</button></div>`;
   const view = $("doc");
   view.querySelectorAll('[id^="b_"]').forEach((el) => el.oninput = () => {
     if (el.id === "b_comment") return store.set("docComment", el.value);
@@ -145,7 +222,7 @@ function renderDoc(kind) {
   $("pdfBtn").onclick = () => {
     const i = +$("seller").value, no = parseInt($("docNo").value) || 1, seller = SELLERS[i];
     // фото лежат внутри приложения, поэтому PDF собирается с картинками и без интернета
-    const lines = cartLines().map((l) => ({ name: l.name, art: l.sku, qty: l.qty, unit: l.unit, price: l.rub, img: CATALOG[l.sku]?.images[0] || "" }));
+    const lines = cartLines().map((l) => ({ name: l.name, art: l.sku, qty: l.qty, unit: l.unit, price: l.rub, img: img(l.sku) }));
     const args = { kind, seller, buyer: store.get("buyer", {}), comment: $("b_comment").value.trim(), lines, no,
       date: $("docDate").value, validDays: $("valid") ? $("valid").value : 0, opts: store.get("docOpts", { photos: true, arts: true }) };
     const name = `${kind === "quote" ? "КП" : "Счёт"} ${no} от ${args.date} ${seller.short}`.replace(/[«»"]/g, "").replace(/[.\s]+$/, "");
@@ -166,54 +243,101 @@ window.onPdf = (err, file) => {
   toast(err ? "PDF не создан: " + err : `PDF сохранён в «Загрузки/TECEspring»: ${file}`);
 };
 
+// ---------- экраны и переходы ----------
 // Z Fold 7 разложен (и планшеты): каталог слева, карточка, корзина или документ справа; сложен — один экран
 const wide = matchMedia("(min-width: 700px)");
+const calm = matchMedia("(prefers-reduced-motion: reduce)");
 const PANES = ["catalog", "card", "cart", "doc"];
+const PARENT = { card: "", cart: "", doc: "cart" }; // куда ведёт «Назад», если приложение открыли сразу на этом экране
+const trail = []; // экраны, пройденные в этом запуске, — чтобы «Назад» знал, есть ли куда возвращаться
+let current = { view: "catalog", sku: null }, catalogScroll = 0;
 
-// экраны переключаются через адрес (#, #cart, #p=артикул, #doc/quote), чтобы работали «Назад» на Android и свайп на iPhone
+function parse(hash) {
+  const h = decodeURIComponent(hash.replace(/^#/, ""));
+  if (h === "cart") return { view: "cart" };
+  if (h.startsWith("p=") && bySku.has(h.slice(2))) return { view: "card", sku: h.slice(2) };
+  if (h.startsWith("doc/")) return { view: "doc", kind: h.slice(4) };
+  return { view: "catalog" };
+}
+
+// экраны переключаются через адрес (#, #cart, #p=артикул, #doc/quote), поэтому работают и кнопка «Назад», и жест на Android и iPhone
 function route() {
-  const h = decodeURIComponent(location.hash.slice(1));
-  let view = "catalog";
-  if (h === "cart") view = "cart";
-  else if (h.startsWith("p=") && renderCard(h.slice(2))) view = "card";
-  else if (h.startsWith("doc/")) view = renderDoc(h.slice(4)) ? "doc" : "cart";
+  let next = parse(location.hash);
+  if (next.view === "card") renderCard(next.sku);
+  if (next.view === "doc" && !renderDoc(next.kind)) next = { view: "cart" };
+  if (next.view === "cart" || wide.matches) renderCart();
+  if (current.view === "catalog" && next.view !== "catalog") catalogScroll = scrollY;
   if (wide.matches) {
-    const right = view === "catalog" ? "cart" : view;
+    const right = next.view === "catalog" ? "cart" : next.view;
     for (const id of PANES) $(id).hidden = id !== "catalog" && id !== right;
     $(right).scrollTop = 0;
   } else {
-    for (const id of PANES) $(id).hidden = id !== view;
-    if (view !== "catalog") scrollTo(0, 0);
+    for (const id of PANES) $(id).hidden = id !== next.view;
+    scrollTo(0, next.view === "catalog" ? catalogScroll : 0);
   }
-  const inCart = view === "cart" || view === "doc";
-  $("nav-catalog").classList.toggle("active", !inCart);
-  $("nav-cart").classList.toggle("active", inCart);
-  renderCart();
+  $("back").hidden = wide.matches ? !["card", "doc"].includes(next.view) : next.view === "catalog";
+  document.body.dataset.view = next.view;
+  const inCart = next.view === "cart" || next.view === "doc";
+  $("nav-catalog").classList.toggle("on", !inCart);
+  $("nav-cart").classList.toggle("on", inCart);
+  current = next;
 }
 
-$("meta").textContent = `${title} · 1 EUR = ${rate} ₽${STORES.length ? ` · остатки: ${stockDates}` : ""}`;
-for (const s of sections) $("section").add(new Option(s.name, s.name));
+// фото товара плавно «перетекает» из плитки каталога в карточку и обратно
+function navigate() {
+  const h = location.hash;
+  if (trail.length > 1 && trail[trail.length - 2] === h) trail.pop(); else if (trail[trail.length - 1] !== h) trail.push(h);
+  if (!document.startViewTransition || calm.matches) return route();
+  const next = parse(h), prev = current;
+  const tileImg = (sku) => document.querySelector(`#list a[data-sku="${CSS.escape(sku)}"] img`);
+  const heroOf = () => document.querySelector("#gal img");
+  let from = null;
+  if (next.view === "card" && prev.view !== "card") from = tileImg(next.sku);
+  if (prev.view === "card" && next.view === "catalog") from = heroOf();
+  if (from) from.style.viewTransitionName = "hero";
+  const t = document.startViewTransition(() => {
+    if (from) from.style.viewTransitionName = "";
+    route();
+    const to = next.view === "card" ? heroOf() : prev.view === "card" ? tileImg(prev.sku) : null;
+    if (from && to) to.style.viewTransitionName = "hero";
+  });
+  t.finished.finally(() => document.querySelectorAll("[style*=view-transition-name]").forEach((el) => el.style.viewTransitionName = ""));
+}
+
+function back() {
+  if (trail.length > 1) history.back();
+  else location.replace("#" + (PARENT[current.view] ?? ""));
+}
+
+// ---------- события ----------
+$("meta").textContent = `Прайс ${(title.match(/\d{2}\/\d{4}/) || [""])[0]}, цены с НДС, 1 € = ${num.format(rate)} ₽`;
+renderTabs();
 $("q").addEventListener("input", renderList);
-$("section").addEventListener("change", renderList);
 $("in-stock").addEventListener("change", renderList);
-document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-add], [data-del], [data-back], [data-go]");
+$("back").addEventListener("click", back);
+$("tabs").addEventListener("click", (e) => {
+  const t = e.target.closest("[data-tab]");
   if (!t) return;
-  if (t.dataset.add) { cart[t.dataset.add] = (cart[t.dataset.add] || 0) + 1; save(); }
-  if (t.dataset.del) { delete cart[t.dataset.del]; save(); }
+  const swap = () => { section = t.dataset.tab; renderTabs(); renderList(); };
+  document.startViewTransition && !calm.matches ? document.startViewTransition(swap) : swap();
+  $("tabs").querySelector(`[aria-selected="true"]`)?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+});
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-add], [data-go], [data-inc], [data-dec]");
+  if (!t) return;
+  if (t.dataset.add) add(t.dataset.add);
   if (t.dataset.go) location.hash = t.dataset.go;
-  if (t.hasAttribute("data-back")) { e.preventDefault(); history.length > 1 ? history.back() : (location.hash = ""); }
+  if (t.dataset.inc) setQty(t.dataset.inc, cart[t.dataset.inc] + 1);
+  if (t.dataset.dec) setQty(t.dataset.dec, cart[t.dataset.dec] - 1);
 });
-$("cart-rows").addEventListener("change", (e) => {
+$("cart").addEventListener("change", (e) => {
   const sku = e.target.dataset.qty;
-  if (!sku) return;
-  const n = Math.floor(Number(e.target.value));
-  if (n >= 1) cart[sku] = n; else delete cart[sku];
-  save();
+  if (sku) setQty(sku, Math.floor(Number(e.target.value)));
 });
-$("clear").addEventListener("click", () => { if (confirm("Очистить корзину?")) { cart = {}; save(); } });
-addEventListener("hashchange", route);
+addEventListener("hashchange", navigate);
 wide.addEventListener("change", route); // сложили или разложили телефон
 
+save();
 renderList();
+trail.push(location.hash);
 route();

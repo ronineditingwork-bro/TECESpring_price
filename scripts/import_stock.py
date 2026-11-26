@@ -1,7 +1,7 @@
 """Обновляет остатки одного склада в www/stock.js.
 
 Запуск:
-  python scripts/import_stock.py Краснодар "путь\\к\\остаткам.xlsx"
+  python scripts/import_stock.py Ростов-на-Дону "путь\\к\\остаткам.xlsx"
   python scripts/import_stock.py Москва "путь\\к\\остаткам ОБЕРОН.xlsx"
 
 Понимает обе выгрузки: «Артикул … Доступно» на первом листе и прайс с колонкой
@@ -61,7 +61,7 @@ def main(store, path):
         data = json.loads(old[old.index("{"): old.rindex("}") + 1])
     data["stores"] = [s for s in data.get("stores", []) if s["name"] != store]
     data["stores"].append({"name": store, "date": date, "items": found})
-    data["stores"].sort(key=lambda s: s["name"] != "Краснодар")  # свой склад первым
+    data["stores"].sort(key=lambda s: s["name"] != "Ростов-на-Дону")  # свой склад первым
     OUT.write_text("window.STOCK = " + json.dumps(data, ensure_ascii=False) + ";\n", encoding="utf-8")
     print(f"{OUT.name}: {store} — {len(found)} артикулов из прайса, {sum(v > 0 for v in found.values())} в наличии, дата {date}")
 

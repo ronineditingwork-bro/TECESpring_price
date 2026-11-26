@@ -12,37 +12,41 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto(url);
   const total = await p.evaluate(() => window.PRICE.sections.reduce((n, s) => n + s.items.length, 0));
-  assert.equal(await p.locator('.items li').count(), total);
+  assert.equal(await p.locator('.tile').count(), total);
 
   // остатки: фильтр «Только в наличии» и подпись у товара
   const inStock = await p.evaluate(() => window.PRICE.sections.flatMap((s) => s.items).filter((i) => window.STOCK.stores.some((s) => s.items[i.sku] > 0)).length);
   await p.check('#in-stock');
-  assert.equal(await p.locator('.items li').count(), inStock);
+  assert.equal(await p.locator('.tile').count(), inStock);
   await p.uncheck('#in-stock');
-  assert.match(await p.textContent('a[href="#p=S710001"]'), /Краснодар: 20 · Москва: 577 шт/);
+  assert.match(await p.textContent('a[href="#p=S710001"]'), /Ростов 20\s*Москва 577/);
 
   await p.fill('#q', 'S710001');
-  assert.equal(await p.locator('.items li').count(), 1);
+  assert.equal(await p.locator('.tile').count(), 1);
   await p.click('[data-add="S710001"]'); await p.click('[data-add="S710001"]');
   await p.fill('#q', '');
 
   // карточка товара: фото, описание, добавление в корзину
   await p.click('a[href="#p=S000000"]');
-  await p.waitForSelector('#card h2'); // экран меняется по hashchange, асинхронно
+  await p.waitForSelector('#card h1'); // экран меняется по hashchange, асинхронно
   assert.ok(!(await p.isVisible('#catalog')));
-  await p.click('#card [data-add="S000000"]');
-  assert.equal(await p.textContent('#card-qty'), 'в корзине: 1');
+  assert.ok(await p.isVisible('#back'), 'back button on inner screens');
+  await p.click('#addBtn');
+  assert.equal(await p.textContent('#card-qty'), 'В корзине 1 м');
   await p.screenshot({ path: shot('card'), fullPage: true });
-  await p.goBack();
-  await p.waitForSelector('#catalog', { state: 'visible' }); // «Назад» возвращает в каталог
+  await p.click('#back'); // кнопка «Назад» в шапке возвращает на предыдущий экран
+  await p.waitForSelector('#catalog', { state: 'visible' });
+  assert.ok(!(await p.isVisible('#back')), 'no back button on the catalog');
 
   await p.click('#nav-cart');
   await p.waitForSelector('#cart', { state: 'visible' });
   await p.fill('[data-qty="S000000"]', '3'); await p.dispatchEvent('[data-qty="S000000"]', 'change');
   // 2 × 24480 + 3 × 919.80 = 51719.40
-  assert.equal((await p.textContent('#total')).replace(/\s/g, ''), '51719,40');
+  assert.equal((await p.textContent('.summary .tot b')).replace(/\s/g, ''), '51719,40₽');
+  await p.click('[data-inc="S000000"]'); await p.click('[data-dec="S000000"]');
+  assert.equal(await p.inputValue('[data-qty="S000000"]'), '3', 'steppers');
   await p.reload();
-  assert.equal(await p.locator('#cart-rows tr').count(), 2, 'cart survives reload');
+  assert.equal(await p.locator('#cart .line').count(), 2, 'cart survives reload');
   assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no horizontal scroll');
   await p.screenshot({ path: shot('cart') });
 
@@ -53,18 +57,22 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.goto(url + '#cart');
   await p.click('[data-go="doc/quote"]');
   await p.waitForSelector('#doc #seller');
+  await p.click('#back'); await p.waitForSelector('#cart', { state: 'visible' }); // «Назад» из документа — в корзину
+  await p.click('[data-go="doc/quote"]');
+  await p.waitForSelector('#doc #seller');
   const sellers = await p.locator('#seller option').allTextContents();
   assert.ok(sellers.length >= 4 && sellers.some((x) => x.includes('КЕРБЕР-ЮГ')), 'seller list: ' + sellers);
   await p.selectOption('#seller', { label: sellers.find((x) => x.includes('КЕРБЕР-ЮГ')) });
   await p.fill('#b_name', 'ООО «Клиент»');
   await p.screenshot({ path: shot('doc-form'), fullPage: true });
   await p.click('#pdfBtn');
-  await p.waitForURL(/doc\.html$/);
+  await p.waitForURL(/doc\.html$/); await p.waitForSelector('h1');
   const doc = await p.textContent('body');
-  assert.match(doc, /Коммерческое предложение № 1 от/);
-  assert.match(doc, /ООО «КЕРБЕР-ЮГ», ИНН 2308293988/);
-  assert.match(doc, /Для:\s*ООО «Клиент»/);
-  assert.match(doc, /В том числе НДС \(22%\): 9\s326,45/);
+  assert.match(doc, /Коммерческое предложение№ 1 от/);
+  assert.match(doc, /ИНН 2308293988, КПП 616601001/);
+  assert.match(doc, /Для\s*ООО «Клиент»/);
+  assert.match(doc, /НДС 22%\s*9\s326,45/);
+  assert.match(doc, /Сумма без НДС\s*42\s392,95/);
   assert.match(doc, /Пятьдесят одна тысяча семьсот девятнадцать рублей 40 копеек/);
   const pics = await p.evaluate(() => [...document.querySelectorAll('td.ph img')].map((i) => i.complete && i.naturalWidth > 0));
   assert.deepEqual(pics, [true, true], 'quote shows a picture for every line');
@@ -75,9 +83,9 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.waitForSelector('#doc #seller');
   assert.match(await p.inputValue('#seller'), /\d/);
   await p.click('#pdfBtn');
-  await p.waitForURL(/doc\.html$/);
+  await p.waitForURL(/doc\.html$/); await p.waitForSelector('h1');
   const inv = await p.textContent('body');
-  assert.match(inv, /Счёт на оплату № 1 от/);
+  assert.match(inv, /Счёт на оплату№ 1 от/);
   assert.match(inv, /044525593/, 'invoice: bank requisites of the chosen seller');
   assert.match(inv, /Главный бухгалтер/);
   await p.screenshot({ path: shot('invoice'), fullPage: true });
@@ -86,11 +94,11 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.emulateMedia({ media: 'screen' });
   await p.setViewportSize({ width: 884, height: 820 });
   await p.goto(url + '#p=S710002');
-  await p.waitForSelector('#card h2');
+  await p.waitForSelector('#card h1');
   assert.ok(await p.isVisible('#catalog') && await p.isVisible('#card') && !(await p.isVisible('#cart')), 'unfolded: list + card');
   assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'unfolded: no horizontal scroll');
   await p.screenshot({ path: shot('fold-open') });
-  await p.click('#nav-cart');
+  await p.click('#cart-top');
   await p.waitForSelector('#cart', { state: 'visible' });
   assert.ok(await p.isVisible('#catalog'), 'unfolded: list stays next to cart');
   const pane = await p.evaluate(() => { const c = document.getElementById('cart'); return [c.scrollWidth, c.clientWidth]; });
