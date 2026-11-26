@@ -48,13 +48,39 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
 
   await p.goto(url);
   await p.screenshot({ path: shot('list') });
-  await p.emulateMedia({ media: 'print' }); await p.setViewportSize({ width: 800, height: 600 });
-  assert.ok(await p.isVisible('#cart-rows'), 'print shows the quote from any screen');
-  assert.ok(await p.evaluate(() => document.getElementById('cart').offsetWidth > innerWidth * 0.9), 'print: quote uses the full page width');
-  assert.match(await p.textContent('#seller'), /ИНН 2308293988, КПП 616601001/, 'print: seller requisites');
-  assert.equal((await p.textContent('#vat')).replace(/\s/g, ''), '9326,45', 'print: VAT 22% included');
-  assert.match(await p.textContent('#sign'), /Директор .* Казачков А\. В\./);
-  await p.screenshot({ path: shot('print') });
+
+  // КП: та же форма, что в WHITECROSS/MAPEI — продавец из общего списка, клиент, PDF с фото товаров
+  await p.goto(url + '#cart');
+  await p.click('[data-go="doc/quote"]');
+  await p.waitForSelector('#doc #seller');
+  const sellers = await p.locator('#seller option').allTextContents();
+  assert.ok(sellers.length >= 4 && sellers.some((x) => x.includes('КЕРБЕР-ЮГ')), 'seller list: ' + sellers);
+  await p.selectOption('#seller', { label: sellers.find((x) => x.includes('КЕРБЕР-ЮГ')) });
+  await p.fill('#b_name', 'ООО «Клиент»');
+  await p.screenshot({ path: shot('doc-form'), fullPage: true });
+  await p.click('#pdfBtn');
+  await p.waitForURL(/doc\.html$/);
+  const doc = await p.textContent('body');
+  assert.match(doc, /Коммерческое предложение № 1 от/);
+  assert.match(doc, /ООО «КЕРБЕР-ЮГ», ИНН 2308293988/);
+  assert.match(doc, /Для:\s*ООО «Клиент»/);
+  assert.match(doc, /В том числе НДС \(22%\): 9\s326,45/);
+  assert.match(doc, /Пятьдесят одна тысяча семьсот девятнадцать рублей 40 копеек/);
+  const pics = await p.evaluate(() => [...document.querySelectorAll('td.ph img')].map((i) => i.complete && i.naturalWidth > 0));
+  assert.deepEqual(pics, [true, true], 'quote shows a picture for every line');
+  assert.match(await p.textContent('.items'), /3\s*м/, 'unit from the price list');
+  await p.screenshot({ path: shot('quote'), fullPage: true });
+
+  await p.goto(url + '#doc/invoice');
+  await p.waitForSelector('#doc #seller');
+  assert.match(await p.inputValue('#seller'), /\d/);
+  await p.click('#pdfBtn');
+  await p.waitForURL(/doc\.html$/);
+  const inv = await p.textContent('body');
+  assert.match(inv, /Счёт на оплату № 1 от/);
+  assert.match(inv, /044525593/, 'invoice: bank requisites of the chosen seller');
+  assert.match(inv, /Главный бухгалтер/);
+  await p.screenshot({ path: shot('invoice'), fullPage: true });
 
   // Z Fold 7 разложен: каталог и карточка рядом, складывание возвращает один экран
   await p.emulateMedia({ media: 'screen' });
@@ -68,12 +94,14 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.waitForSelector('#cart', { state: 'visible' });
   assert.ok(await p.isVisible('#catalog'), 'unfolded: list stays next to cart');
   const pane = await p.evaluate(() => { const c = document.getElementById('cart'); return [c.scrollWidth, c.clientWidth]; });
-  assert.ok(pane[0] <= pane[1], `unfolded: quote fits its pane (${pane})`);
+  assert.ok(pane[0] <= pane[1], `unfolded: cart fits its pane (${pane})`);
   await p.screenshot({ path: shot('fold-cart') });
+  await p.click('[data-go="doc/quote"]');
+  await p.waitForSelector('#doc #seller');
+  assert.ok(await p.isVisible('#catalog') && !(await p.isVisible('#cart')), 'unfolded: list + quote form');
+  await p.screenshot({ path: shot('fold-doc') });
   await p.setViewportSize({ width: 411, height: 900 }); // сложили: внешний экран
   await p.waitForFunction(() => document.getElementById('catalog').hidden);
-  await p.emulateMedia({ media: 'print' });
-  assert.equal(await p.evaluate(() => getComputedStyle(document.getElementById('cart')).maxHeight), 'none', 'print not clipped');
 
   // в карточках не должно быть битых фото
   const broken = await p.evaluate(async () => {

@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: node --check www/app.js
+      - run: node --check www/app.js && node --test tests/docs.test.js
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: gradle/actions/setup-gradle@v4

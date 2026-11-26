@@ -10,21 +10,31 @@ const stockDates = STORES.map((s) => `${s.name} на ${s.date}`).join(", ");
 const bySku = new Map(sections.flatMap((s) => s.items.map((i) => [i.sku, i])));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const $ = (id) => document.getElementById(id);
+const DOCS = { quote: "Коммерческое предложение", invoice: "Счёт на оплату" };
 
-const SELLERS = window.SELLERS || [];
-let sellerIdx = 0;
-try { sellerIdx = Math.min(Number(localStorage.getItem("tecespring-seller")) || 0, SELLERS.length - 1); } catch {}
+// localStorage может быть недоступен (приватный режим) — тогда приложение просто ничего не запоминает
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("tecespring-" + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("tecespring-" + k, JSON.stringify(v)); } catch {} },
+};
 
-let cart = {};
-try { cart = JSON.parse(localStorage.getItem("tecespring-cart")) || {}; } catch {}
+let cart = store.get("cart", {});
 for (const sku of Object.keys(cart)) if (!bySku.has(sku)) delete cart[sku]; // позиция ушла из нового прайса
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 }
 
+function toast(text) {
+  const t = $("toast");
+  t.textContent = text;
+  t.classList.add("on");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => t.classList.remove("on"), 3500);
+}
+
 function save() {
-  try { localStorage.setItem("tecespring-cart", JSON.stringify(cart)); } catch {}
+  store.set("cart", cart);
   renderCart();
 }
 
@@ -72,99 +82,138 @@ function renderCard(sku) {
   return true;
 }
 
+const cartLines = () => Object.entries(cart).map(([sku, n]) => ({ ...bySku.get(sku), qty: n }));
+// сумма по каждой строке округляется до копеек, как в счёте
+const cartTotal = () => cartLines().reduce((t, r) => t + Math.round(r.rub * r.qty * 100) / 100, 0);
+
 function renderCart() {
-  const rows = Object.entries(cart).map(([sku, qty]) => ({ ...bySku.get(sku), qty }));
-  // сумма по каждой строке округляется до копеек, как в счёте
-  const total = rows.reduce((t, r) => t + Math.round(r.rub * r.qty * 100) / 100, 0);
+  const rows = cartLines(), total = cartTotal();
   $("cart-rows").innerHTML = rows
     .map((r) => `<tr><td class="sku">${esc(r.sku)}</td><td>${esc(r.name)}</td>
-      <td><input type="number" min="1" step="1" inputmode="numeric" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"> ${esc(r.unit)}${r.qty > stock(r.sku) ? `<small class="out no-print">на складах: ${qty.format(stock(r.sku))}</small>` : ""}</td>
+      <td><input type="number" min="1" step="1" inputmode="numeric" value="${r.qty}" data-qty="${esc(r.sku)}" aria-label="Количество, ${esc(r.unit)}"> ${esc(r.unit)}${r.qty > stock(r.sku) ? `<small class="out">на складах: ${qty.format(stock(r.sku))}</small>` : ""}</td>
       <td class="num">${rub.format(r.rub)}</td><td class="num">${rub.format(r.rub * r.qty)}</td>
-      <td class="no-print"><button type="button" class="secondary" data-del="${esc(r.sku)}" aria-label="Удалить">×</button></td></tr>`)
+      <td><button type="button" class="secondary" data-del="${esc(r.sku)}" aria-label="Удалить">×</button></td></tr>`)
     .join("");
   $("total").textContent = rub.format(total);
-  const vat = SELLERS[sellerIdx]?.vatRate || 0;
-  $("vat-label").textContent = vat ? `В том числе НДС (${vat}%)` : "Без НДС";
-  $("vat").textContent = vat ? rub.format(Math.round(total * vat / (100 + vat) * 100) / 100) : "";
   $("empty").hidden = rows.length > 0;
+  $("cart-table").hidden = $("cart-actions").hidden = !rows.length;
   $("cart-sum").textContent = rows.length ? `· ${rub.format(total)} ₽` : "";
   const q = $("card-qty");
   if (q) q.textContent = cart[q.dataset.sku] ? `в корзине: ${cart[q.dataset.sku]}` : "";
 }
 
-// Z Fold 7 разложен (и планшеты): каталог слева, карточка или корзина справа; сложен — один экран
-const wide = matchMedia("(min-width: 700px)");
+// «Коммерческое предложение» или «Счёт на оплату» — та же форма, что в WHITECROSS и MAPEI: продавец, номер, клиент, «Создать PDF»
+function renderDoc(kind) {
+  if (!DOCS[kind] || !Object.keys(cart).length) return false;
+  const si = Math.min(store.get("seller", 0), SELLERS.length - 1);
+  const noKey = (i) => `no:${kind}:${SELLERS[i].inn}`;
+  const opts = store.get("docOpts", { photos: true, arts: true });
+  const b = store.get("buyer", {});
+  const n = Object.keys(cart).length;
+  const field = (id, label, type = "text", mode = "") => `<label for="b_${id}">${label}</label><input id="b_${id}" type="${type}" ${mode ? `inputmode="${mode}"` : ""} value="${esc(b[id] || "")}">`;
+  const sw = (id, t, sub) => `<label class="switch"><span>${t}<small>${sub}</small></span><input type="checkbox" id="o_${id}" ${opts[id] ? "checked" : ""}></label>`;
+  $("doc").innerHTML = `
+    <a href="#cart" class="back">← Корзина</a>
+    <h2>${DOCS[kind]}</h2>
+    <p class="muted">${n} ${n === 1 ? "позиция" : n < 5 ? "позиции" : "позиций"} на ${rub.format(cartTotal())} ₽</p>
+    <div class="form">
+      <label for="seller">Продавец</label>
+      <select id="seller">${SELLERS.map((s, i) => `<option value="${i}" ${i === si ? "selected" : ""}>${s.kpp ? "" : "ИП "}${esc(s.short)}, ${s.vatRate ? "НДС " + s.vatRate + "%" : "без НДС"}</option>`).join("")}</select>
+      <div class="two">
+        <div><label for="docNo">Номер</label><input id="docNo" type="number" inputmode="numeric" min="1" value="${store.get(noKey(si), 1)}"></div>
+        <div><label for="docDate">Дата</label><input id="docDate" type="date" value="${new Date().toLocaleDateString("sv")}"></div>
+      </div>
+      ${kind === "quote" ? `<label for="valid">Срок действия, дней</label><input id="valid" type="number" inputmode="numeric" min="1" value="${store.get("validDays", 14)}">` : ""}
+      ${sw("photos", "Фото товаров", "Картинка у каждой позиции")}
+      ${sw("arts", "Артикулы", "Выключите, чтобы клиент не видел артикулы")}
+      <h3>${kind === "quote" ? "Клиент" : "Покупатель"}</h3>
+      ${field("name", "Имя или компания")}
+      <div class="two"><div>${field("inn", "ИНН", "text", "numeric")}</div><div>${field("kpp", "КПП", "text", "numeric")}</div></div>
+      ${field("address", "Адрес")}
+      ${field("phone", "Телефон", "tel")}
+      <label for="b_comment">Комментарий в начале документа</label><textarea id="b_comment" rows="3">${esc(store.get("docComment", ""))}</textarea>
+      <button type="button" class="full" id="pdfBtn">Создать PDF</button>
+    </div>`;
+  const view = $("doc");
+  view.querySelectorAll('[id^="b_"]').forEach((el) => el.oninput = () => {
+    if (el.id === "b_comment") return store.set("docComment", el.value);
+    const cur = store.get("buyer", {}); cur[el.id.slice(2)] = el.value.trim(); store.set("buyer", cur);
+  });
+  view.querySelectorAll('[id^="o_"]').forEach((el) => el.onchange = () => { const o = store.get("docOpts", { photos: true, arts: true }); o[el.id.slice(2)] = el.checked; store.set("docOpts", o); });
+  if ($("valid")) $("valid").oninput = () => store.set("validDays", parseInt($("valid").value) || 14);
+  $("seller").onchange = () => { store.set("seller", +$("seller").value); $("docNo").value = store.get(noKey(+$("seller").value), 1); };
+  $("pdfBtn").onclick = () => {
+    const i = +$("seller").value, no = parseInt($("docNo").value) || 1, seller = SELLERS[i];
+    // фото лежат внутри приложения, поэтому PDF собирается с картинками и без интернета
+    const lines = cartLines().map((l) => ({ name: l.name, art: l.sku, qty: l.qty, unit: l.unit, price: l.rub, img: CATALOG[l.sku]?.images[0] || "" }));
+    const args = { kind, seller, buyer: store.get("buyer", {}), comment: $("b_comment").value.trim(), lines, no,
+      date: $("docDate").value, validDays: $("valid") ? $("valid").value : 0, opts: store.get("docOpts", { photos: true, arts: true }) };
+    const name = `${kind === "quote" ? "КП" : "Счёт"} ${no} от ${args.date} ${seller.short}`.replace(/[«»"]/g, "").replace(/[.\s]+$/, "");
+    if (window.Android) { $("pdfBtn").disabled = true; $("pdfBtn").textContent = "Создаём PDF…"; window.Android.pdf(buildDoc(args), name); }
+    else {
+      try { localStorage.setItem("docHtml", buildDoc({ ...args, opts: { ...args.opts, toolbar: true } })); } catch (e) { return toast("Документ не открылся: " + e.message); }
+      location.href = "doc.html";
+    }
+    store.set(noKey(i), no + 1);
+    $("docNo").value = no + 1;
+  };
+  return true;
+}
 
-// экраны переключаются через адрес (#, #cart, #p=артикул), чтобы работали «Назад» на Android и свайп на iPhone
+// MainActivity вызывает это, когда PDF сохранён в «Загрузки/TECEspring» и открыто окно «Отправить»
+window.onPdf = (err, file) => {
+  if ($("pdfBtn")) { $("pdfBtn").disabled = false; $("pdfBtn").textContent = "Создать PDF"; }
+  toast(err ? "PDF не создан: " + err : `PDF сохранён в «Загрузки/TECEspring»: ${file}`);
+};
+
+// Z Fold 7 разложен (и планшеты): каталог слева, карточка, корзина или документ справа; сложен — один экран
+const wide = matchMedia("(min-width: 700px)");
+const PANES = ["catalog", "card", "cart", "doc"];
+
+// экраны переключаются через адрес (#, #cart, #p=артикул, #doc/quote), чтобы работали «Назад» на Android и свайп на iPhone
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
-  const sku = h.startsWith("p=") ? h.slice(2) : null;
-  const view = h === "cart" ? "cart" : sku && renderCard(sku) ? "card" : "catalog";
+  let view = "catalog";
+  if (h === "cart") view = "cart";
+  else if (h.startsWith("p=") && renderCard(h.slice(2))) view = "card";
+  else if (h.startsWith("doc/")) view = renderDoc(h.slice(4)) ? "doc" : "cart";
   if (wide.matches) {
-    $("catalog").hidden = false;
-    $("card").hidden = view !== "card";
-    $("cart").hidden = view === "card";
-    $(view === "card" ? "card" : "cart").scrollTop = 0;
+    const right = view === "catalog" ? "cart" : view;
+    for (const id of PANES) $(id).hidden = id !== "catalog" && id !== right;
+    $(right).scrollTop = 0;
   } else {
-    for (const id of ["catalog", "card", "cart"]) $(id).hidden = id !== view;
+    for (const id of PANES) $(id).hidden = id !== view;
     if (view !== "catalog") scrollTo(0, 0);
   }
-  $("nav-catalog").classList.toggle("active", view !== "cart");
-  $("nav-cart").classList.toggle("active", view === "cart");
+  const inCart = view === "cart" || view === "doc";
+  $("nav-catalog").classList.toggle("active", !inCart);
+  $("nav-cart").classList.toggle("active", inCart);
   renderCart();
-}
-
-function renderSeller() {
-  const s = SELLERS[sellerIdx];
-  $("seller-pick").hidden = SELLERS.length < 2;
-  $("seller-select").innerHTML = SELLERS.map((x, n) => `<option value="${n}"${n === sellerIdx ? " selected" : ""}>${esc(x.name)}</option>`).join("");
-  $("seller").innerHTML = s ? `<b>Поставщик: ${esc(s.fullName || s.name)}</b><br>
-    ИНН ${esc(s.inn)}${s.kpp ? `, КПП ${esc(s.kpp)}` : ""}, ${s.kpp ? "ОГРН" : "ОГРНИП"} ${esc(s.ogrn)}${s.okpo ? `, ОКПО ${esc(s.okpo)}` : ""}<br>
-    Юридический адрес: ${esc(s.address)}${s.office ? `<br>Фактический адрес: ${esc(s.office)}` : ""}<br>
-    Тел.: ${esc(s.phone)}${s.email ? `, e-mail: ${esc(s.email)}` : ""}<br>
-    Р/с ${esc(s.account)} в ${esc(s.bank)}, БИК ${esc(s.bik)}, к/с ${esc(s.ks)}` : "";
-  $("sign").textContent = s ? `${s.directorTitle || "Руководитель"} ______________________ ${s.director || ""}` : "";
-  renderCart();
-}
-
-function quoteHtml() {
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="styles.css"></head>
-    <body><main>${$("cart").outerHTML}</main></body></html>`;
 }
 
 $("meta").textContent = `${title} · 1 EUR = ${rate} ₽${STORES.length ? ` · остатки: ${stockDates}` : ""}`;
-$("quote-date").textContent = `${title}. Дата: ${new Date().toLocaleDateString("ru-RU")}`;
 for (const s of sections) $("section").add(new Option(s.name, s.name));
 $("q").addEventListener("input", renderList);
 $("section").addEventListener("change", renderList);
 $("in-stock").addEventListener("change", renderList);
 document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-add], [data-del], [data-back]");
+  const t = e.target.closest("[data-add], [data-del], [data-back], [data-go]");
   if (!t) return;
   if (t.dataset.add) { cart[t.dataset.add] = (cart[t.dataset.add] || 0) + 1; save(); }
   if (t.dataset.del) { delete cart[t.dataset.del]; save(); }
+  if (t.dataset.go) location.hash = t.dataset.go;
   if (t.hasAttribute("data-back")) { e.preventDefault(); history.length > 1 ? history.back() : (location.hash = ""); }
 });
 $("cart-rows").addEventListener("change", (e) => {
   const sku = e.target.dataset.qty;
   if (!sku) return;
-  const qty = Math.floor(Number(e.target.value));
-  if (qty >= 1) cart[sku] = qty; else delete cart[sku];
+  const n = Math.floor(Number(e.target.value));
+  if (n >= 1) cart[sku] = n; else delete cart[sku];
   save();
 });
-$("print").addEventListener("click", () => {
-  if (window.Android) window.Android.print(quoteHtml(), "КП TECEspring");
-  else window.print();
-});
-$("clear").addEventListener("click", () => { cart = {}; save(); });
-$("seller-select").addEventListener("change", (e) => {
-  sellerIdx = Number(e.target.value);
-  try { localStorage.setItem("tecespring-seller", sellerIdx); } catch {}
-  renderSeller();
-});
+$("clear").addEventListener("click", () => { if (confirm("Очистить корзину?")) { cart = {}; save(); } });
 addEventListener("hashchange", route);
 wide.addEventListener("change", route); // сложили или разложили телефон
 
 renderList();
-renderSeller();
 route();

@@ -58,12 +58,19 @@ td.sku, th.sku { white-space: nowrap; color: var(--muted); font-size: 13px; }
 #cart { overflow-x: auto; }
 tfoot td { font-weight: 600; border-bottom: 0; }
 .actions { display: flex; gap: 8px; margin-top: 12px; }
-.print-only { display: none; }
-.pick { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
-.pick[hidden] { display: none; }
-.seller { font-size: 12px; line-height: 1.5; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-tfoot .vat td { font-weight: 400; color: var(--muted); padding-top: 0; }
-.sign { margin-top: 40px; }
+.actions { flex-wrap: wrap; }
+[hidden] { display: none !important; }
+#doc .back { display: inline-block; padding: 4px 0 8px; text-decoration: none; }
+.form label { display: block; margin: 12px 0 4px; font-size: 13px; color: var(--muted); }
+.form input:not([type=checkbox]), .form select, .form textarea { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font: inherit; color: inherit; }
+.form .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form h3 { margin: 24px 0 0; font-size: 16px; }
+.form .switch { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; color: var(--fg); font-size: 15px; }
+.form .switch input { width: 22px; height: 22px; }
+button.full { width: 100%; margin-top: 20px; padding: 14px; font-weight: 600; }
+#toast { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: 90vw; padding: 10px 16px;
+  border-radius: 20px; background: rgba(29,29,31,.92); color: #fff; font-size: 13px; text-align: center; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
+#toast.on { opacity: 1; }
 
 nav { position: fixed; left: 0; right: 0; bottom: 0; display: flex; background: var(--bg); border-top: 1px solid var(--line);
   padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
@@ -72,7 +79,7 @@ nav a.active { color: var(--accent); }
 
 @media (min-width: 700px) {
   main { max-width: 1400px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-  #card, #cart { position: sticky; top: 12px; max-height: calc(100dvh - 90px - env(safe-area-inset-bottom)); overflow-y: auto;
+  #card, #cart, #doc { position: sticky; top: 12px; max-height: calc(100dvh - 90px - env(safe-area-inset-bottom)); overflow-y: auto;
     background: var(--panel); border-radius: 12px; padding: 16px; }
   #card .back { display: none; }
   #cart td, #cart th { padding: 8px 4px; }
@@ -85,14 +92,3 @@ nav a.active { color: var(--accent); }
   td.sku, th.sku { display: none; }
 }
 
-@media print {
-  :root { --bg: #fff; --fg: #000; --muted: #444; --line: #bbb; }
-  header, nav, #catalog, #card, .no-print, #empty { display: none !important; }
-  body { padding: 0; }
-  main { display: block; padding: 0; max-width: none; }
-  #cart { display: block !important; position: static; max-height: none; overflow: visible; background: none; padding: 0; }
-  .print-only { display: block; }
-  td.sku, th.sku { display: table-cell; }
-  input[type=number] { border: 0; width: 3em; padding: 0; }
-  #cart-rows td:nth-child(3) { white-space: nowrap; }
-}
