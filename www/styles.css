@@ -64,7 +64,18 @@ nav { position: fixed; left: 0; right: 0; bottom: 0; display: flex; background: 
 nav a { flex: 1; text-align: center; padding: 16px 8px; color: var(--muted); text-decoration: none; font-weight: 600; }
 nav a.active { color: var(--accent); }
 
-@media (max-width: 600px) {
+@media (min-width: 700px) {
+  main { max-width: 1400px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  #card, #cart { position: sticky; top: 12px; max-height: calc(100dvh - 90px - env(safe-area-inset-bottom)); overflow-y: auto;
+    background: var(--panel); border-radius: 12px; padding: 16px; }
+  #card .back { display: none; }
+  #cart td, #cart th { padding: 8px 4px; }
+  #cart input[type=number] { width: 52px; }
+  #nav-catalog { display: none; }
+}
+
+/* телефон и половина экрана разложенного Fold: артикул виден в карточке, в таблице КП — только при печати */
+@media (max-width: 600px), (min-width: 700px) and (max-width: 1200px) {
   td.sku, th.sku { display: none; }
 }
 
@@ -73,7 +84,7 @@ nav a.active { color: var(--accent); }
   header, nav, #catalog, #card, .no-print, #empty { display: none !important; }
   body { padding: 0; }
   main { padding: 0; max-width: none; }
-  #cart { display: block !important; }
+  #cart { display: block !important; position: static; max-height: none; overflow: visible; background: none; padding: 0; }
   .print-only { display: block; }
   td.sku, th.sku { display: table-cell; }
   input[type=number] { border: 0; width: 3em; padding: 0; }

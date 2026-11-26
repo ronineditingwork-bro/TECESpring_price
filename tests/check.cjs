@@ -52,6 +52,25 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   assert.ok(await p.isVisible('#cart-rows'), 'print shows the quote from any screen');
   await p.screenshot({ path: shot('print') });
 
+  // Z Fold 7 разложен: каталог и карточка рядом, складывание возвращает один экран
+  await p.emulateMedia({ media: 'screen' });
+  await p.setViewportSize({ width: 884, height: 820 });
+  await p.goto(url + '#p=S710002');
+  await p.waitForSelector('#card h2');
+  assert.ok(await p.isVisible('#catalog') && await p.isVisible('#card') && !(await p.isVisible('#cart')), 'unfolded: list + card');
+  assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'unfolded: no horizontal scroll');
+  await p.screenshot({ path: shot('fold-open') });
+  await p.click('#nav-cart');
+  await p.waitForSelector('#cart', { state: 'visible' });
+  assert.ok(await p.isVisible('#catalog'), 'unfolded: list stays next to cart');
+  const pane = await p.evaluate(() => { const c = document.getElementById('cart'); return [c.scrollWidth, c.clientWidth]; });
+  assert.ok(pane[0] <= pane[1], `unfolded: quote fits its pane (${pane})`);
+  await p.screenshot({ path: shot('fold-cart') });
+  await p.setViewportSize({ width: 411, height: 900 }); // сложили: внешний экран
+  await p.waitForFunction(() => document.getElementById('catalog').hidden);
+  await p.emulateMedia({ media: 'print' });
+  assert.equal(await p.evaluate(() => getComputedStyle(document.getElementById('cart')).maxHeight), 'none', 'print not clipped');
+
   // в карточках не должно быть битых фото
   const broken = await p.evaluate(async () => {
     const srcs = Object.values(window.CATALOG).flatMap((c) => c.images);

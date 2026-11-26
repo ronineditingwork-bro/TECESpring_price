@@ -80,15 +80,25 @@ function renderCart() {
   if (q) q.textContent = cart[q.dataset.sku] ? `в корзине: ${cart[q.dataset.sku]}` : "";
 }
 
+// Z Fold 7 разложен (и планшеты): каталог слева, карточка или корзина справа; сложен — один экран
+const wide = matchMedia("(min-width: 700px)");
+
 // экраны переключаются через адрес (#, #cart, #p=артикул), чтобы работали «Назад» на Android и свайп на iPhone
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
   const sku = h.startsWith("p=") ? h.slice(2) : null;
   const view = h === "cart" ? "cart" : sku && renderCard(sku) ? "card" : "catalog";
-  for (const id of ["catalog", "card", "cart"]) $(id).hidden = id !== view;
+  if (wide.matches) {
+    $("catalog").hidden = false;
+    $("card").hidden = view !== "card";
+    $("cart").hidden = view === "card";
+    $(view === "card" ? "card" : "cart").scrollTop = 0;
+  } else {
+    for (const id of ["catalog", "card", "cart"]) $(id).hidden = id !== view;
+    if (view !== "catalog") scrollTo(0, 0);
+  }
   $("nav-catalog").classList.toggle("active", view !== "cart");
   $("nav-cart").classList.toggle("active", view === "cart");
-  if (view !== "catalog") scrollTo(0, 0);
   renderCart();
 }
 
@@ -123,6 +133,7 @@ $("print").addEventListener("click", () => {
 });
 $("clear").addEventListener("click", () => { cart = {}; save(); });
 addEventListener("hashchange", route);
+wide.addEventListener("change", route); // сложили или разложили телефон
 
 renderList();
 route();
