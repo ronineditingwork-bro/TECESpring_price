@@ -1,0 +1,46 @@
+# Publishes to GitHub Pages (Settings → Pages → Source: GitHub Actions):
+#   the app itself for iPhone (Safari → Share → «На экран Домой»)
+#   TECEspring.apk for Android, built from the same www/ folder.
+name: Build
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  # Two jobs, as in GitHub's own Pages template: deploying from the same job that uploaded
+  # the site sometimes fails with "No artifacts named github-pages".
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node --check www/app.js
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: 8.14.3 }
+      - name: Build APK
+        run: gradle assembleDebug
+      - name: Site
+        run: |
+          cp -r www _site
+          mv app/build/outputs/apk/debug/app-debug.apk _site/TECEspring.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: TECEspring-apk, path: _site/TECEspring.apk }
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

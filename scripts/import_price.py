@@ -11,7 +11,7 @@ from pathlib import Path
 import openpyxl
 
 SHEET = "ТЕСЕspring сантехника"
-OUT = Path(__file__).resolve().parent.parent / "price.js"
+OUT = Path(__file__).resolve().parent.parent / "www" / "price.js"
 
 
 def clean(v):

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="TECEspring">
+<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>TECEspring</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>TECEspring</h1>
+  <p id="meta"></p>
+</header>
+
+<main>
+  <section id="catalog">
+    <div class="filters">
+      <input id="q" type="search" placeholder="Поиск по названию или артикулу" aria-label="Поиск">
+      <select id="section" aria-label="Раздел"><option value="">Все разделы</option></select>
+      <label class="check"><input type="checkbox" id="in-stock"> Только в наличии</label>
+    </div>
+    <div id="list"></div>
+  </section>
+
+  <section id="card" hidden></section>
+
+  <section id="cart" hidden>
+    <h2>Коммерческое предложение</h2>
+    <p class="print-only" id="quote-date"></p>
+    <table>
+      <thead><tr><th class="sku">Артикул</th><th>Наименование</th><th>Кол-во</th><th class="num">Цена, ₽</th><th class="num">Сумма, ₽</th><th class="no-print"></th></tr></thead>
+      <tbody id="cart-rows"></tbody>
+      <tfoot><tr><td class="sku"></td><td colspan="3">Итого, с НДС</td><td id="total" class="num">0</td><td class="no-print"></td></tr></tfoot>
+    </table>
+    <p id="empty">Добавьте товары из каталога.</p>
+    <div class="actions no-print">
+      <button id="print" type="button">Печать / PDF</button>
+      <button id="clear" type="button" class="secondary">Очистить</button>
+    </div>
+  </section>
+</main>
+
+<nav class="no-print">
+  <a href="#" id="nav-catalog">Каталог</a>
+  <a href="#cart" id="nav-cart">Корзина <span id="cart-sum"></span></a>
+</nav>
+
+<script src="price.js"></script>
+<script src="catalog.js"></script>
+<script src="stock.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

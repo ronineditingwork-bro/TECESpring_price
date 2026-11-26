@@ -1,23 +1,66 @@
+// Browser check of www/: node tests/check.cjs (needs Playwright with Chromium)
 const { chromium } = require('playwright');
 const assert = require('assert');
+const path = require('path');
+const os = require('os');
+const url = require('url').pathToFileURL(path.join(__dirname, '..', 'www', 'index.html')).href;
+const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
+
 (async () => {
-  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1280, height: 900 } });
-  const errs = []; p.on('pageerror', e => errs.push(e.message));
-  await p.goto(require('url').pathToFileURL(require('path').join(__dirname, '..', 'index.html')).href);
-  assert.equal(await p.locator('#list tr').count(), 108);
+  const b = await chromium.launch();
+  const p = await b.newPage({ viewport: { width: 390, height: 844 } });
+  const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+  await p.goto(url);
+  const total = await p.evaluate(() => window.PRICE.sections.reduce((n, s) => n + s.items.length, 0));
+  assert.equal(await p.locator('.items li').count(), total);
+
+  // остатки: фильтр «Только в наличии» и подпись у товара
+  const inStock = await p.evaluate(() => window.PRICE.sections.flatMap((s) => s.items).filter((i) => window.STOCK.items[i.sku] > 0).length);
+  await p.check('#in-stock');
+  assert.equal(await p.locator('.items li').count(), inStock);
+  await p.uncheck('#in-stock');
+  assert.match(await p.textContent('a[href="#p=S710001"]'), /в наличии: 20 шт/);
+
   await p.fill('#q', 'S710001');
-  assert.equal(await p.locator('#list tr').count(), 1);
+  assert.equal(await p.locator('.items li').count(), 1);
   await p.click('[data-add="S710001"]'); await p.click('[data-add="S710001"]');
-  await p.fill('#q', ''); await p.dispatchEvent('#q', 'input');
-  await p.click('[data-add="S000000"]');
+  await p.fill('#q', '');
+
+  // карточка товара: фото, описание, добавление в корзину
+  await p.click('a[href="#p=S000000"]');
+  await p.waitForSelector('#card h2'); // экран меняется по hashchange, асинхронно
+  assert.ok(!(await p.isVisible('#catalog')));
+  await p.click('#card [data-add="S000000"]');
+  assert.equal(await p.textContent('#card-qty'), 'в корзине: 1');
+  await p.screenshot({ path: shot('card'), fullPage: true });
+  await p.goBack();
+  await p.waitForSelector('#catalog', { state: 'visible' }); // «Назад» возвращает в каталог
+
+  await p.click('#nav-cart');
+  await p.waitForSelector('#cart', { state: 'visible' });
   await p.fill('[data-qty="S000000"]', '3'); await p.dispatchEvent('[data-qty="S000000"]', 'change');
   // 2 × 24480 + 3 × 919.80 = 51719.40
   assert.equal((await p.textContent('#total')).replace(/\s/g, ''), '51719,40');
   await p.reload();
   assert.equal(await p.locator('#cart-rows tr').count(), 2, 'cart survives reload');
-  await p.screenshot({ path: require('path').join(require('os').tmpdir(), 'tecespring-desk.png') });
-  await p.setViewportSize({ width: 390, height: 844 }); await p.screenshot({ path: require('path').join(require('os').tmpdir(), 'tecespring-phone.png') });
-  assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= 390), 'no horizontal scroll');
-  await p.emulateMedia({ media: 'print' }); await p.setViewportSize({ width: 800, height: 600 }); await p.screenshot({ path: require('path').join(require('os').tmpdir(), 'tecespring-print.png') });
-  assert.deepEqual(errs, []); console.log('OK'); await b.close();
-})().catch(e => { console.error(e); process.exit(1); });
+  assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no horizontal scroll');
+  await p.screenshot({ path: shot('cart') });
+
+  await p.goto(url);
+  await p.screenshot({ path: shot('list') });
+  await p.emulateMedia({ media: 'print' }); await p.setViewportSize({ width: 800, height: 600 });
+  assert.ok(await p.isVisible('#cart-rows'), 'print shows the quote from any screen');
+  await p.screenshot({ path: shot('print') });
+
+  // в карточках не должно быть битых фото
+  const broken = await p.evaluate(async () => {
+    const srcs = Object.values(window.CATALOG).flatMap((c) => c.images);
+    const bad = [];
+    await Promise.all(srcs.map((s) => new Promise((ok) => { const i = new Image(); i.onload = ok; i.onerror = () => { bad.push(s); ok(); }; i.src = s; })));
+    return bad;
+  });
+  assert.deepEqual(broken, []);
+  assert.deepEqual(errs, []);
+  console.log('OK, screenshots in', os.tmpdir());
+  await b.close();
+})().catch((e) => { console.error(e); process.exit(1); });
