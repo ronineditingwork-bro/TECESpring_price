@@ -37,6 +37,14 @@ def load(name):
     return json.loads(src[src.index("{"): src.rindex("}") + 1])
 
 
+def save(new):
+    """Дописывает карточки в www/catalog.js, перечитав файл прямо перед записью: скрипты могут работать одновременно."""
+    catalog = load("catalog.js") if (WWW / "catalog.js").exists() else {}
+    catalog.update(new)
+    (WWW / "catalog.js").write_text("window.CATALOG = " + json.dumps(catalog, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
+    return catalog
+
+
 def crawl(base):
     host = urllib.parse.urlparse(base).netloc
     seen, queue, pages = set(), ["/"], {}
@@ -75,7 +83,7 @@ def main(base, sheet_name):
 
     catalog = load("catalog.js") if (WWW / "catalog.js").exists() else {}
     (WWW / "img").mkdir(exist_ok=True)
-    added = 0
+    added, new = 0, {}
     for sku, (_, path) in sorted(best.items()):
         if catalog.get(sku, {}).get("images"):
             continue
@@ -89,9 +97,9 @@ def main(base, sheet_name):
                 time.sleep(0.2)
             files.append(f"img/{f.name}")
         if files:
-            catalog[sku] = {"title": "", "text": "", "images": files[:6], "docs": [], "url": base + path}
+            new[sku] = {"title": "", "text": "", "images": files[:6], "docs": [], "url": base + path}
             added += 1
-    (WWW / "catalog.js").write_text("window.CATALOG = " + json.dumps(catalog, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
+    catalog = save(new)
     missing = [k for k in wanted if not catalog.get(k, {}).get("images")]
     print(f"страниц: {len(pages)}; фото добавлено для {added}; без фото {len(missing)} из {len(wanted)}: {', '.join(missing) or 'нет'}")
 

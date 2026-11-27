@@ -1,11 +1,12 @@
 """Собирает с spring.tececatalog.ru фото, описание и документы для артикулов из price.js.
 
-Запуск: python scripts/scrape_catalog.py
+Запуск: python scripts/scrape_catalog.py [https://spring.tececatalog.ru | https://tecegerman.ru]
 Пишет www/catalog.js и скачивает фото в www/img/.
 """
 import html
 import json
 import re
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -94,27 +95,38 @@ def crawl():
     return products
 
 
-def main():
+def main(base=BASE):
+    global BASE
+    BASE = base.rstrip("/")
     wanted = price_skus()
     found = {sku: p for sku, p in crawl().items() if sku in wanted}
-    catalog = {}
+    # дописываем к уже собранным карточкам (другие сайты, другие вкладки), найденные раньше не трогаем
+    old = (WWW / "catalog.js").read_text(encoding="utf-8") if (WWW / "catalog.js").exists() else "{}"
+    catalog = json.loads(old[old.index("{"): old.rindex("}") + 1])
+    found = {sku: p for sku, p in found.items() if not catalog.get(sku, {}).get("images")}
     (WWW / "img").mkdir(exist_ok=True)
     for sku, p in sorted(found.items()):
         files = []
         for src in p["images"]:
             # одно фото часто стоит у нескольких артикулов (комплекты, схемы запчастей): храним его один раз
-            key = re.search(r"/iblock/\w+/(\w+)/", src).group(1)
+            m = re.search(r"/iblock/(\w+)/(?:(?!\d+_\d+_)(\w{20,})/)?", src)  # хеш-папки бывает нет: …/iblock/d88/<размер>/файл
+            key = m.group(2) or f"{m.group(1)}-{Path(src).stem}"
             f = WWW / "img" / (key + Path(src).suffix.lower())
             if not f.exists():
                 f.write_bytes(get(BASE + urllib.parse.quote(src), binary=True))
                 time.sleep(0.2)
             files.append(f"img/{f.name}")
         catalog[sku] = {"title": p["title"], "text": p["text"], "images": files, "docs": p["docs"], "url": p["url"]}
+    # перечитываем файл перед записью: другие скрипты фото могли дописать его, пока шёл обход сайта
+    fresh = (WWW / "catalog.js").read_text(encoding="utf-8")
+    fresh = json.loads(fresh[fresh.index("{"): fresh.rindex("}") + 1])
+    fresh.update({sku: catalog[sku] for sku in found})
+    catalog = fresh
     (WWW / "catalog.js").write_text(
         "window.CATALOG = " + json.dumps(catalog, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
-    missing = sorted(wanted - set(catalog))
-    print(f"найдено {len(catalog)} из {len(wanted)}; без карточки: {', '.join(missing) or 'нет'}")
+    missing = sorted(k for k in wanted if not catalog.get(k, {}).get("images"))
+    print(f"{BASE}: новых карточек {len(found)}; всего с фото {len(wanted) - len(missing)} из {len(wanted)}")
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:2])
