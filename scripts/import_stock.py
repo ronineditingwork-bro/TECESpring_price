@@ -65,7 +65,7 @@ def main(store, path):
     if OUT.exists():
         old = OUT.read_text(encoding="utf-8")
         data = json.loads(old[old.index("{"): old.rindex("}") + 1])
-    data["stores"] = [s for s in data.get("stores", []) if s["name"] != store]
+    data["stores"] = [s for s in data.get("stores", []) if s["name"] != store or s.get("sheets")]  # склады поставщика Deante/KK POL пишет import_gsheet.py
     data["stores"].append({"name": store, "date": date, "items": found})
     data["stores"].sort(key=lambda s: s["name"] != "Ростов-на-Дону")  # свой склад первым
     OUT.write_text("window.STOCK = " + json.dumps(data, ensure_ascii=False) + ";\n", encoding="utf-8")

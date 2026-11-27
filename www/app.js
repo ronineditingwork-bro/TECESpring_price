@@ -1,6 +1,6 @@
-const SHEETS = window.PRICE.sheets; // вкладки прайса: TECE, TECEspring, Uranum, BWT, Poloplast, Conex Banninger, Viega
+const SHEETS = window.PRICE.sheets; // вкладки прайса TECE (TECEspring, Uranum, BWT, Poloplast, Conex, Viega) и Deante, Deante кухня, KK POL
 const CATALOG = window.CATALOG || {};
-const STORES = window.STOCK?.stores || []; // склады: Ростов-на-Дону, Москва
+const STORES = window.STOCK?.stores || []; // склады: Ростов-на-Дону, Москва; у складов поставщика Deante/KK POL — свои вкладки (sheets)
 const bySku = new Map(SHEETS.flatMap((s, si) => s.groups.flatMap((g) => g.items.map((i) => [i.sku, { ...i, sheet: si, group: g.name }]))));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const num = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 });
@@ -11,8 +11,11 @@ const ICON = {
   pdf: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4"/></svg>',
 };
 
-const stock = (sku) => STORES.reduce((n, s) => n + (s.items[sku] || 0), 0); // нет в выгрузке — нет на складе
-const city = (name) => name.split("-")[0]; // «Ростов-на-Дону» → «Ростов» там, где мало места
+const CLAIMED = new Set(STORES.flatMap((s) => s.sheets || []));
+const storesFor = (sku) => { const sh = SHEETS[bySku.get(sku)?.sheet]?.name; return STORES.filter((s) => s.sheets ? s.sheets.includes(sh) : !CLAIMED.has(sh)); };
+// нет в выгрузке — нет на складе; «В пути» и «Польша» (transit) наличием не считаем
+const stock = (sku) => storesFor(sku).reduce((n, s) => n + (s.transit ? 0 : s.items[sku] || 0), 0);
+const city = (name) => ({ "Ростов-на-Дону": "Ростов", "Санкт-Петербург": "СПб" })[name] || name; // короткое имя там, где мало места
 const img = (sku) => CATALOG[sku]?.images[0] || "";
 
 // localStorage может быть недоступен (приватный режим) — тогда приложение просто ничего не запоминает
@@ -53,9 +56,10 @@ function add(sku, n = 1) {
 }
 
 function stockLine(sku) {
-  if (!STORES.length) return "";
+  const stores = storesFor(sku);
+  if (!stores.length) return "";
   if (!stock(sku)) return '<div class="stock"><span>Нет на складах</span></div>';
-  return `<div class="stock">${STORES.map((s) => { const n = s.items[sku] || 0; return `<span class="${n > 0 ? "y" : ""}">${esc(city(s.name))} <b>${num.format(n)}</b></span>`; }).join("")}</div>`;
+  return `<div class="stock">${stores.filter((s) => !s.transit || s.items[sku] > 0).map((s) => { const n = s.items[sku] || 0; return `<span class="${n > 0 ? "y" : ""}">${esc(city(s.name))} <b>${num.format(n)}</b></span>`; }).join("")}</div>`;
 }
 
 // ---------- каталог: главный экран — вкладки прайса, внутри вкладки — группы ----------
@@ -133,7 +137,7 @@ function renderList() {
 function renderCard(sku) {
   const i = bySku.get(sku);
   if (!i) return false;
-  const c = CATALOG[sku] || { images: [], text: "", docs: [] };
+  const c = { images: [], text: "", docs: [], specs: [], ...CATALOG[sku] };
   const slides = c.images.length ? c.images.map((src, n) => `<div class="ph"><img src="${esc(src)}" alt="${n ? "" : esc(i.name)}"></div>`).join("") : '<div class="ph"><span class="noimg"></span></div>';
   $("card").innerHTML = `
     <div class="gallery" id="gal">${slides}</div>
@@ -142,17 +146,18 @@ function renderCard(sku) {
       <p class="sku-line"><a href="#s=${i.sheet}">${esc(SHEETS[i.sheet].name)}</a>, ${esc(i.group)}. Артикул ${esc(i.sku)}</p>
       <h1 class="title">${esc(i.name)}</h1>
       <p class="bigprice">${rub.format(i.rub)} ₽<small>${i.eur != null ? `${num.format(i.eur)} € ` : ""}за ${esc(i.unit)}, с НДС</small></p>
-      ${STORES.length ? `<div class="wh">${STORES.map((s) => { const n = s.items[sku] || 0; return `<div>${esc(s.name)}<b class="${n > 0 ? "" : "no"}">${n > 0 ? `${num.format(n)} ${esc(i.unit)}` : "нет"}</b><small>на ${esc(s.date)}</small></div>`; }).join("")}</div>` : ""}
+      ${storesFor(sku).length ? `<div class="wh">${storesFor(sku).map((s) => { const n = s.items[sku] || 0; return `<div>${esc(s.name)}<b class="${n > 0 ? "" : "no"}">${n > 0 ? `${num.format(n)} ${esc(i.unit)}` : "нет"}</b><small>на ${esc(s.date)}</small></div>`; }).join("")}</div>` : ""}
       <div class="buy">
         <span class="stepper"><button type="button" data-step="-1" aria-label="Меньше">−</button><input id="addQty" type="number" inputmode="numeric" min="1" value="1" aria-label="Количество, ${esc(i.unit)}"><button type="button" data-step="1" aria-label="Больше">+</button></span>
         <button type="button" class="btn" id="addBtn">В корзину</button>
       </div>
       <p class="incart" id="card-qty">${cart[sku] ? `В корзине ${cart[sku]} ${esc(i.unit)}` : ""}</p>
     </div>
+    ${c.specs.length ? `<div class="panel"><h3>Характеристики</h3><dl class="specs">${c.specs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>` : ""}
     ${c.text ? `<div class="panel"><h3>Описание</h3><div class="desc">${esc(c.text.replace(/\n\s*\n/g, "\n"))}</div></div>` : ""}
     ${c.docs.length || c.url ? `<div class="panel"><h3>Документация</h3><ul class="docs">
       ${c.docs.map((d) => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${ICON.pdf}${esc(d.name)}</a></li>`).join("")}
-      ${c.url ? `<li><a href="${esc(c.url)}" target="_blank" rel="noopener">Страница товара на spring.tececatalog.ru</a></li>` : ""}
+      ${c.url ? `<li><a href="${esc(c.url)}" target="_blank" rel="noopener">Страница товара на ${esc(new URL(c.url).hostname.replace(/^www\./, ""))}</a></li>` : ""}
     </ul></div>` : ""}`;
   const q = $("addQty");
   $("card").querySelectorAll("[data-step]").forEach((b) => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.step); });

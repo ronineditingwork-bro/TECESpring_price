@@ -21,7 +21,7 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   assert.ok(await p.isVisible('#back'), 'back button inside a price tab');
 
   // остатки: фильтр «Только в наличии» и подпись у товара
-  const inStock = await p.evaluate((n) => window.PRICE.sheets[n].groups.flatMap((g) => g.items).filter((i) => window.STOCK.stores.some((s) => s.items[i.sku] > 0)).length, spring);
+  const inStock = await p.evaluate((n) => window.PRICE.sheets[n].groups.flatMap((g) => g.items).filter((i) => window.STOCK.stores.some((s) => !s.sheets && s.items[i.sku] > 0)).length, spring);
   await p.check('#in-stock');
   assert.equal(await p.locator('.tile').count(), inStock);
   await p.uncheck('#in-stock');
@@ -61,6 +61,23 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   assert.equal(await p.locator('#cart .line').count(), 2, 'cart survives reload');
   assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no horizontal scroll');
   await p.screenshot({ path: shot('cart') });
+
+  // Deante, KK POL: характеристики из таблицы и склады поставщика — только на своих вкладках
+  const dsku = await p.evaluate(() => {
+    const spb = window.STOCK.stores.find((s) => s.name === 'Санкт-Петербург');
+    return window.PRICE.sheets.find((s) => s.name === 'Deante кухня').groups.flatMap((g) => g.items)
+      .find((i) => spb.items[i.sku] > 0 && window.CATALOG[i.sku]?.specs?.length && window.CATALOG[i.sku].images.length).sku;
+  });
+  await p.goto(url + '#p=' + encodeURIComponent(dsku));
+  await p.waitForSelector('#card h1');
+  assert.ok(await p.isVisible('#card .specs'), 'specs panel');
+  const wh = await p.textContent('#card .wh');
+  assert.match(wh, /Санкт-Петербург/); assert.doesNotMatch(wh, /Ростов/);
+  await p.screenshot({ path: shot('deante'), fullPage: true });
+  const kk = await p.evaluate(() => window.PRICE.sheets.findIndex((s) => s.name === 'KK POL'));
+  await p.goto(url + '#s=' + kk);
+  await p.waitForSelector('.tile');
+  assert.ok(!(await p.textContent('#list')).includes('Ростов'), 'no TECE stores on KK POL');
 
   await p.goto(url);
   await p.screenshot({ path: shot('list') });
