@@ -35746,5 +35746,425 @@ window.CATALOG = {
   ],
   "docs": [],
   "url": "https://www.bwt.ru/product/id-264-rabochee-naimenovanie-125691704-guardian-filterelement-filtruyushchiy-element/"
+ },
+ "9030030": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-145-223.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "9030031": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-145-224.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600720": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600721": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600740": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600741": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600820": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600821": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600840": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600841": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600920": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600921": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600940": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "600941": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601020": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601021": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601040": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601041": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601220": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601221": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601240": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601241": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601520": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601521": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-171-256.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601540": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "601541": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-172-258.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "610982": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-175-263.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "611082": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-175-263.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "611282": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-175-263.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
+ },
+ "3665003": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/tece-2026-201-306.webp"
+  ],
+  "docs": [
+   {
+    "name": "Каталог TECE «Сантехнические системы» 01.2026",
+    "url": "https://www.tece.com/sites/default/files/media-documents/main/2025-12/%D0%9A%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%A1%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B%2001.2026.pdf"
+   }
+  ],
+  "url": ""
  }
 };
