@@ -60,6 +60,8 @@ def main():
         if files:
             new[sku] = {"title": "", "text": "", "images": files[:6], "docs": [], "url": BASE + link}
             added += 1
+            if added % 20 == 0:
+                save(new)  # обход долгий — сохраняем по ходу, чтобы обрыв не терял найденное
     catalog = save(new)
     missing = [k for k in wanted if not catalog.get(k, {}).get("images")]
     print(f"BWT: фото добавлено для {added}; без фото {len(missing)} из {len(wanted)}")
