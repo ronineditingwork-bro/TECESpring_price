@@ -5952,5 +5952,869 @@ window.CATALOG = {
   ],
   "docs": [],
   "url": "https://vg-rus.ru/poisk/?q=266509"
+ },
+ "810508": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-6d7-setka.png",
+   "img/bwt-b96-zagruzhennoe.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-setka-dlya-protector-mini/"
+ },
+ "84047": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-cd5-cd5c7872464e5be801ae677b7c7f7ab6.png",
+   "img/bwt-4e2-4e2a56a5c165fa4ef0eae205ead0e501.png",
+   "img/bwt-0ed-0edd76674ea6d7b737b40f3c4ed001c7.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-filtruyushchiy-element-avanti-rf-i-diago-hws-a-f1-rf-i-f1-hws/"
+ },
+ "125300274": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-29f-img_6907.png",
+   "img/bwt-dc8-9f13a8ad0c0fcc6516cf9aa3dfa27f31.png",
+   "img/bwt-a10-cb9784af4b611f7be68817d1448f9d65.png",
+   "img/bwt-37c-img_6910.png",
+   "img/bwt-352-img_6912.png",
+   "img/bwt-c20-img_6917.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-846-reduktor-davleniya-bwt-d1-eco-hot/"
+ },
+ "125300275": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-2a8-img_6907.png",
+   "img/bwt-dc8-9f13a8ad0c0fcc6516cf9aa3dfa27f31.png",
+   "img/bwt-a10-cb9784af4b611f7be68817d1448f9d65.png",
+   "img/bwt-37c-img_6910.png",
+   "img/bwt-352-img_6912.png",
+   "img/bwt-c20-img_6917.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-846-reduktor-davleniya-bwt-d1-eco-hot-model_19661/"
+ },
+ "125300276": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-aed-img_6907.png",
+   "img/bwt-dc8-9f13a8ad0c0fcc6516cf9aa3dfa27f31.png",
+   "img/bwt-a10-cb9784af4b611f7be68817d1448f9d65.png",
+   "img/bwt-37c-img_6910.png",
+   "img/bwt-352-img_6912.png",
+   "img/bwt-c20-img_6917.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-846-reduktor-davleniya-bwt-d1-eco-hot-model_1966/"
+ },
+ "840384": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-9c4-рычажный механический фильтр bwt e1.png",
+   "img/bwt-106-рычажный механический фильтр bwt e1 2.jpg",
+   "img/bwt-034-рычажный механический фильтр bwt e1 12.jpg",
+   "img/bwt-3dc-рычажный механический фильтр bwt e1 4.jpg",
+   "img/bwt-2c8-рычажный механический фильтр bwt e1 10.jpg",
+   "img/bwt-e0c-рычажный механический фильтр bwt e1 5.jpg"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-filtr-mekhanicheskoy-ochistki-vody-bwt-e1/"
+ },
+ "840385": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-9c4-рычажный механический фильтр bwt e1.png",
+   "img/bwt-106-рычажный механический фильтр bwt e1 2.jpg",
+   "img/bwt-034-рычажный механический фильтр bwt e1 12.jpg",
+   "img/bwt-3dc-рычажный механический фильтр bwt e1 4.jpg",
+   "img/bwt-2c8-рычажный механический фильтр bwt e1 10.jpg",
+   "img/bwt-e0c-рычажный механический фильтр bwt e1 5.jpg"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-filtr-mekhanicheskoy-ochistki-vody-bwt-e1-model_6104/"
+ },
+ "812829": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-e4d-1.один фильтр вместо сложных систем (2).png",
+   "img/bwt-394-1.odin-filtr-vmesto-slozhnykh-sistem_1.png",
+   "img/bwt-189-2.uverennost-v-vode-kazhdyi_-den.png",
+   "img/bwt-f2e-3.obratnoosmoticheskaya-membrana-dlya-ochistki-do-98_-zagryaznenii_.png",
+   "img/bwt-101-4.maksimalnaya-stepen-zashchity_-dlya-vody-lyubogo-tipa.png",
+   "img/bwt-2b3-11.-vysokaya-proizvoditelnost.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-273-smennaya-membrana-dlya-obratnogo-osmosa-bwt-ro-990/"
+ },
+ "BWTRO990": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-fa9-1.один фильтр вместо сложных систем (1).png",
+   "img/bwt-0ff-1.odin-filtr-vmesto-slozhnykh-sistem.png",
+   "img/bwt-544-2.uverennost-v-vode-kazhdyi_-den.png",
+   "img/bwt-652-3.obratnoosmoticheskaya-membrana-dlya-ochistki-do-98_-zagryaznenii_.png",
+   "img/bwt-11f-4.maksimalnaya-stepen-zashchity_-dlya-vody-lyubogo-tipa.png",
+   "img/bwt-a4d-5._100_-pokupatelei_-dovolny-kachestvom-vody-bwt-ro990-100_-pokupatelei_-dovolny-udobstvom-ispolzovaniya-filtra-bwt-ro990.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-897-ustanovka-obratnogo-osmosa-bwt-ro990-thero/"
+ },
+ "821105": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-433-1.один фильтр вместо сложных систем.png",
+   "img/bwt-c7a-1.png",
+   "img/bwt-956-3.png",
+   "img/bwt-01c-4.png",
+   "img/bwt-a10-5.png",
+   "img/bwt-1d3-6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-897-821105-bwt-thero-90-pro-blue/"
+ },
+ "10605": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-3bf-bwt infinity a.png",
+   "img/bwt-e3f-bwt infinity a 7.jpg",
+   "img/bwt-b16-bwt infinity a 8.png",
+   "img/bwt-8a5-bwt infinity a  4.png",
+   "img/bwt-517-bwt infinity a 10.png",
+   "img/bwt-434-bwt infinity a 5.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-infinity-a/"
+ },
+ "812533": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-2c3-2c305d8b8453eaaa435293633db55fd8.png",
+   "img/bwt-24f-карточка 650.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-876-golovnaya-chast-filtra-woda-pure-new/"
+ },
+ "812580": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-97c-97c998c12f31e40429ec2fa47705de6c.png",
+   "img/bwt-4fc-карточка 19.png",
+   "img/bwt-216-карточка 650.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-876-golovnaya-chast-filtra-woda-pure-mineralizer/"
+ },
+ "812591": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-fd7-200.png",
+   "img/bwt-b9c-kartochka-335.png",
+   "img/bwt-3ce-kartochka-533.png",
+   "img/bwt-b70-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-d20-kartochka-377.png",
+   "img/bwt-f92-kartochka-345.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-magnesium-mineralized-water-m200/"
+ },
+ "812592": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-b20-kartochka-323-_1_.png",
+   "img/bwt-b9c-kartochka-335.png",
+   "img/bwt-3ce-kartochka-533.png",
+   "img/bwt-b70-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-d20-kartochka-377.png",
+   "img/bwt-f92-kartochka-345.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-magnesium-mineralized-water-m200-model_6073/"
+ },
+ "812593": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-005-400.png",
+   "img/bwt-b9c-kartochka-335.png",
+   "img/bwt-3ce-kartochka-533.png",
+   "img/bwt-b70-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-d20-kartochka-377.png",
+   "img/bwt-f92-kartochka-345.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-magnesium-mineralized-water-m200-model_15711/"
+ },
+ "812595": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-d7b-400.png",
+   "img/bwt-43b-kartochka-474.png",
+   "img/bwt-b4f-kartochka-639.png",
+   "img/bwt-5e9-kartochka-453.png",
+   "img/bwt-70b-kartochka-454.png",
+   "img/bwt-1c9-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-magnesium-mineralized-water-protect-care/"
+ },
+ "812596": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-773-500.png",
+   "img/bwt-43b-kartochka-474.png",
+   "img/bwt-b4f-kartochka-639.png",
+   "img/bwt-5e9-kartochka-453.png",
+   "img/bwt-70b-kartochka-454.png",
+   "img/bwt-1c9-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-magnesium-mineralized-water-protect-care-model_6078/"
+ },
+ "812655": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-3d9-frame 2087327091 (2).png",
+   "img/bwt-cb5-odin-filtr-vmesto-slozhnykh-sistem.png",
+   "img/bwt-ac4-kartochka-551.png",
+   "img/bwt-3e8-uf_membrana-ot-virusov_-bakterii_-i-mikroplastika.png",
+   "img/bwt-d58-kartochka-541.png",
+   "img/bwt-a19-kartochka-539.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-filtr-filtered-water-care-tc200/"
+ },
+ "812656": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-5e4-200.png",
+   "img/bwt-c08-kartochka-417.png",
+   "img/bwt-473-kartochka-534.png",
+   "img/bwt-00b-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-17d-kartochka-392.png",
+   "img/bwt-a0c-kartochka-480.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-magnesium-mineralized-water-protect/"
+ },
+ "812563": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-228-kartochka-564.png",
+   "img/bwt-c19-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-21e-uf_membrana-ot-virusov_-bakterii_-i-mikroplastika.png",
+   "img/bwt-ad8-kartochka-565.png",
+   "img/bwt-9a6-kartochka-557.png",
+   "img/bwt-5ee-kartochka-582.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-273-filtr-woda-pure-soft-min-m/"
+ },
+ "125258689": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-903-kartochka-512.png",
+   "img/bwt-f5e-kartochka-513.png",
+   "img/bwt-9b8-kartochka-522.png",
+   "img/bwt-166-zapatentovannaya-tekhnologiya-bwt-magnesium-mineralized-water.png",
+   "img/bwt-4ba-uf_membrana-ot-virusov_-bakterii_-i-mikroplastika.png",
+   "img/bwt-cd7-kartochka-635.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-125258689-filtr-bwt-mcs-400/"
+ },
+ "125258673": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-cdf-200.png",
+   "img/bwt-102-kartochka-278.png",
+   "img/bwt-38e-kartochka-283.png",
+   "img/bwt-64f-kartochka-280.png",
+   "img/bwt-ebb-kartochka-285.png",
+   "img/bwt-2ff-kartochka-375.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-273-zinc-magnesium-mineralized-water-protect/"
+ },
+ "125258674": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-0d7-300.png",
+   "img/bwt-102-kartochka-278.png",
+   "img/bwt-38e-kartochka-283.png",
+   "img/bwt-64f-kartochka-280.png",
+   "img/bwt-ebb-kartochka-285.png",
+   "img/bwt-2ff-kartochka-375.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-273-zinc-magnesium-mineralized-water-protect-model_19007/"
+ },
+ "125258675": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-74d-400.png",
+   "img/bwt-102-kartochka-278.png",
+   "img/bwt-38e-kartochka-283.png",
+   "img/bwt-64f-kartochka-280.png",
+   "img/bwt-ebb-kartochka-285.png",
+   "img/bwt-2ff-kartochka-375.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-273-zinc-magnesium-mineralized-water-protect-model_19008/"
+ },
+ "125258688": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-661-frame-2087327092.png",
+   "img/bwt-80c-kartochka-572.png",
+   "img/bwt-0f1-kartochka-642.png",
+   "img/bwt-510-kartochka-583.png",
+   "img/bwt-ae7-kartochka-573.png",
+   "img/bwt-f1c-kartochka-576.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-884-812655-filtr-filtered-water-ac100/"
+ },
+ "810506": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-4b4-r.png",
+   "img/bwt-0d9-r 2.png",
+   "img/bwt-0c3-r 7.png",
+   "img/bwt-091-r 3.png",
+   "img/bwt-cab-r 6.png",
+   "img/bwt-cdc-r 12.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-h-r/"
+ },
+ "810507": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-4b4-r.png",
+   "img/bwt-0d9-r 2.png",
+   "img/bwt-0c3-r 7.png",
+   "img/bwt-091-r 3.png",
+   "img/bwt-cab-r 6.png",
+   "img/bwt-cdc-r 12.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-h-r-model_6033/"
+ },
+ "810531": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-ac7-r.png",
+   "img/bwt-6cf-r 2.png",
+   "img/bwt-8fb-r 7.png",
+   "img/bwt-182-r 6.png",
+   "img/bwt-3c9-r 3.png",
+   "img/bwt-9f3-r  9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-1-model_6094/"
+ },
+ "810541": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-4b4-r.png",
+   "img/bwt-0d9-r 2.png",
+   "img/bwt-0c3-r 7.png",
+   "img/bwt-091-r 3.png",
+   "img/bwt-cab-r 6.png",
+   "img/bwt-cdc-r 12.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-h-r-model_6095/"
+ },
+ "810523": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-ac7-r.png",
+   "img/bwt-6cf-r 2.png",
+   "img/bwt-8fb-r 7.png",
+   "img/bwt-182-r 6.png",
+   "img/bwt-3c9-r 3.png",
+   "img/bwt-9f3-r  9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-1/"
+ },
+ "810524": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-ac7-r.png",
+   "img/bwt-6cf-r 2.png",
+   "img/bwt-8fb-r 7.png",
+   "img/bwt-182-r 6.png",
+   "img/bwt-3c9-r 3.png",
+   "img/bwt-9f3-r  9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-1-model_6035/"
+ },
+ "810548": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-f22-r hws.png",
+   "img/bwt-df8-r hws 5.png",
+   "img/bwt-c38-r hws 2.png",
+   "img/bwt-cfe-r hws 6.png",
+   "img/bwt-aac-r hws 7.png",
+   "img/bwt-9fb-r hws 8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-hws-s-reduktorom-davleniya/"
+ },
+ "810549": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-f22-r hws.png",
+   "img/bwt-df8-r hws 5.png",
+   "img/bwt-c38-r hws 2.png",
+   "img/bwt-cfe-r hws 6.png",
+   "img/bwt-aac-r hws 7.png",
+   "img/bwt-9fb-r hws 8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-hws-s-reduktorom-davleniya-model_6151/"
+ },
+ "810550": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-f22-r hws.png",
+   "img/bwt-df8-r hws 5.png",
+   "img/bwt-c38-r hws 2.png",
+   "img/bwt-cfe-r hws 6.png",
+   "img/bwt-aac-r hws 7.png",
+   "img/bwt-9fb-r hws 8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-s-r-hws-s-reduktorom-davleniya-model_6152/"
+ },
+ "810558": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-6ce-r.png",
+   "img/bwt-a02-r 17.png",
+   "img/bwt-959-r 15.png",
+   "img/bwt-3c8-r 7.png",
+   "img/bwt-15c-r  13.png",
+   "img/bwt-b84-r  8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-filtr-mekhanicheskoy-ochistki-vody-bwt-protector-mini-1-2-30-m/"
+ },
+ "810560": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-03d-r hws.png",
+   "img/bwt-4c1-r hws 6.png",
+   "img/bwt-775-r hws 3.png",
+   "img/bwt-2a9-r hws 7.png",
+   "img/bwt-8fc-r hws 8.png",
+   "img/bwt-0cf-r hws 4.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-h-r-hws-s-reduktorom-davleniya/"
+ },
+ "810563": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-03d-r hws.png",
+   "img/bwt-4c1-r hws 6.png",
+   "img/bwt-775-r hws 3.png",
+   "img/bwt-2a9-r hws 7.png",
+   "img/bwt-8fc-r hws 8.png",
+   "img/bwt-0cf-r hws 4.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-protector-mini-h-r-hws-s-reduktorom-davleniya-model_6173/"
+ },
+ "84654": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-fa2-aksialnii_manometr.png",
+   "img/bwt-71c-aksialnii_manometr2.png",
+   "img/bwt-26b-aksialnii_manometr3.png",
+   "img/bwt-33c-aksialnii_manometr4.png",
+   "img/bwt-c61-aksialnii_manometr5.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-846-manometr-aksialnyy-osevoy-1-4-0-10-bar/"
+ },
+ "84655": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-fa9-radialnii_manometr.png",
+   "img/bwt-3c5-radialnii_manometr2.png",
+   "img/bwt-2c1-radialnii_manometr3.png",
+   "img/bwt-f14-radialnii_manometr4.png",
+   "img/bwt-718-radialnii_manometr5.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-manometr-radialnyy-1-4-0-10-bar/"
+ },
+ "10305/919": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-c20-bwt infinity m hws.png",
+   "img/bwt-078-bwt infinity m hws 7.jpg",
+   "img/bwt-7ca-bwt infinity m hws 3.png",
+   "img/bwt-7a1-bwt infinity m hws 8.png",
+   "img/bwt-83c-bwt infinity m hws 4.png",
+   "img/bwt-1e0-bwt infinity m hws 10.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-10305-919-filtr-mekhanicheskoy-ochistki-vody-bwt-infinity-m-hws-s-reduktorom-davleniya-i-obratnym-kl/"
+ },
+ "810201": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-7a0-bwt avanti rf.png",
+   "img/bwt-009-bwt avanti rf 7.png",
+   "img/bwt-bc1-bwt avanti rf 4.png",
+   "img/bwt-e00-bwt avanti rf 8.png",
+   "img/bwt-c28-bwt avanti rf 14.png",
+   "img/bwt-5da-bwt avanti rf 9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-10202-bwt-avanti-rf-1-filtr-s-ruchnoy-obratnoy-promyvkoy/"
+ },
+ "810202": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-7a0-bwt avanti rf.png",
+   "img/bwt-009-bwt avanti rf 7.png",
+   "img/bwt-bc1-bwt avanti rf 4.png",
+   "img/bwt-e00-bwt avanti rf 8.png",
+   "img/bwt-c28-bwt avanti rf 14.png",
+   "img/bwt-5da-bwt avanti rf 9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-10202-bwt-avanti-rf-1-filtr-s-ruchnoy-obratnoy-promyvkoy-model_6097/"
+ },
+ "810203": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-7a0-bwt avanti rf.png",
+   "img/bwt-009-bwt avanti rf 7.png",
+   "img/bwt-bc1-bwt avanti rf 4.png",
+   "img/bwt-e00-bwt avanti rf 8.png",
+   "img/bwt-c28-bwt avanti rf 14.png",
+   "img/bwt-5da-bwt avanti rf 9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-10202-bwt-avanti-rf-1-filtr-s-ruchnoy-obratnoy-promyvkoy-model_6098/"
+ },
+ "840365": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-a7e-bwt r1 rsf.png",
+   "img/bwt-bdf-bwt r1 rsf 4.png",
+   "img/bwt-b51-bwt r1 rsf 2.png",
+   "img/bwt-7e1-bwt r1 rsf 5.png",
+   "img/bwt-1c1-bwt r1 rsf 6.png",
+   "img/bwt-cee-bwt r1 rsf 8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-bwt-r1-rsf-1--model_6106/"
+ },
+ "01BWPS15": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-68f-0080.png",
+   "img/bwt-e75-perla silk 15 2.png",
+   "img/bwt-a4a-perla silk 15 3.png",
+   "img/bwt-764-perla silk 15 4.jpg",
+   "img/bwt-58e-perla silk 15 5.jpg",
+   "img/bwt-029-perla silk 15 11.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-odnokolonnyy-umyagchitel-vody-bwt-perla-silk/"
+ },
+ "01BWPS25": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-d37-0084.png",
+   "img/bwt-039-perla silk 25 2.png",
+   "img/bwt-430-perla silk 25 3.png",
+   "img/bwt-974-perla silk 25 4.jpg",
+   "img/bwt-159-perla silk 25 5.jpg",
+   "img/bwt-9e1-perla silk 25 6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-odnokolonnyy-umyagchitel-vody-bwt-perla-silk-model_ps25/"
+ },
+ "B0044964IT": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-7ef-aqa perla 30 bio.png",
+   "img/bwt-4c1-aqa perla 30 bio 13.jpg",
+   "img/bwt-944-aqa perla 30 bio 2.png",
+   "img/bwt-405-aqa perla 30 bio 6.png",
+   "img/bwt-f4e-aqa perla 30 bio 5.jpg",
+   "img/bwt-a91-aqa perla 30 bio 4.jpg"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-odnokolonnyy-kompaktnyy-umyagchitel-vody-bwt-aqa-perla-model_6037/"
+ },
+ "P0001495RU": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-e95-bwt aqa trinity 1.png",
+   "img/bwt-d5e-bwt aqa trinity 2.png",
+   "img/bwt-0ed-bwt aqa trinity 4.jpg",
+   "img/bwt-c56-bwt aqa trinity 5.jpg",
+   "img/bwt-5a7-bwt aqa trinity 6 (1).jpg",
+   "img/bwt-671-bwt aqa trinity 7.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-aqa-trinity/"
+ },
+ "21103F": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-4c8-4c8cc5c9ee060171280ca5e8e90df614.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-360-bwt-erf-a21/"
+ },
+ "21104F": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-4c8-4c8cc5c9ee060171280ca5e8e90df614.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-360-bwt-erf-a21-model_21104F/"
+ },
+ "21012F": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-44a-44afb40a2803a35a0043d7125c022065.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-359-bwt-msf-a21/"
+ },
+ "21503F": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-1dd-1dd3f982295044c5cfe1d63887f391d6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-268-bwt-akf-a21/"
+ },
+ "21504F": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-1dd-1dd3f982295044c5cfe1d63887f391d6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-268-bwt-akf-a21-model_21504F/"
+ },
+ "887527E": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-27b-multiblock_inline_f_6.png",
+   "img/bwt-005-multiblock_inline_f_7.png",
+   "img/bwt-a7a-multiblock_inline_f_5.png",
+   "img/bwt-ab1-multiblock_inline_f_2.png",
+   "img/bwt-9a9-multiblock_inline_f_8.png",
+   "img/bwt-fee-multiblock_inline_f_9.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-multiblock/"
+ },
+ "887528": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-673-multiblock-inline-f_6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-multiblock-model_18967/"
+ },
+ "125596636": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-74a-0043.png",
+   "img/bwt-876-0044.png",
+   "img/bwt-33a-0038.png",
+   "img/bwt-673-multiblock-inline-f_6.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-multiblock-model_125596636/"
+ },
+ "831000E": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-dfa-4_1.png",
+   "img/bwt-b80-4_0.png",
+   "img/bwt-a4c-4_2.png",
+   "img/bwt-fd2-4_3.png",
+   "img/bwt-a15-4_4.png",
+   "img/bwt-7d2-4_5.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-263-multiblock-model_18975/"
+ },
+ "23301": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-ccf-ccfb4abfaf96f236c46d900a3e2738b1.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-267-aqa-nano/"
+ },
+ "84130": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-325-32521bc3473e54e657dab377b04e7344.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-267-smennyy-kartridzh-refill-dlya-aqa-total-energy-1500-4500/"
+ },
+ "160150": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-cd4-0051.png",
+   "img/bwt-ee9-0050.png",
+   "img/bwt-f57-0053.png",
+   "img/bwt-157-0054.png",
+   "img/bwt-e86-korobka_pikomata.jpg",
+   "img/bwt-44c-0084.jpg"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-260-160150-dozator-piccomat-/"
+ },
+ "60008": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-cdb-cdbebb25e425630a0f05dbed09f8e5c8.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-259-ustanovka-dlya-udaleniya-izvestkovykh-otlozheniy-quot-cillit-sek-28-quot/"
+ },
+ "12116300": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-24f-24f2e66e5875ea80e748368f1ddb39f7.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-259-ustanovka-dlya-udaleniya-izvestkovykh-otlozheniy-sek-19/"
+ },
+ "10145": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-0d6-0004.png",
+   "img/bwt-c6b-0005.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-331-cillit-hs-23-rs-plus/"
+ },
+ "10144AB": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-1a1-0012.png",
+   "img/bwt-ec2-0013.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-331-cillit-hs-23-rs-plus-model_25033/"
+ },
+ "10135": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-5cb-0006.png",
+   "img/bwt-f81-0007.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-331-cillit-hs-23-combi/"
+ },
+ "10136AA": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-20b-0014.png",
+   "img/bwt-e74-0015.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-331-cillit-hs-23-combi-model_25018/"
+ },
+ "10137": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-ede-0017.png",
+   "img/bwt-fa5-0018.png"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-331-cillit-hs-23-combi-model_25019/"
  }
 };
