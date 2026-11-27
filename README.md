@@ -61,6 +61,14 @@ python scripts/scrape_tilda.py https://uranum-russia.ru Uranum
 
 `scrape_catalog.py` обходит spring.tececatalog.ru и сопоставляет товары с прайсом по артикулу. Она пишет `www/catalog.js` и скачивает фото, которых ещё нет. В конце печатает артикулы, для которых на сайте нет карточки.
 
+В конце уменьшите фото: они скачиваются в исходном размере, а в APK попадают целиком.
+
+```bash
+python scripts/optimize_images.py
+```
+
+Скрипт переводит фото в WebP до 800 px и удаляет файлы, на которые не ссылается каталог. Нужен Pillow (`pip install pillow`).
+
 После этого сделайте commit и push, и обе версии обновятся.
 
 ## Проверка
