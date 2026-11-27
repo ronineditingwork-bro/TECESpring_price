@@ -22,6 +22,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 from scrape_tilda import WWW, get, load, save  # noqa: E402
 
 SHEET = "https://docs.google.com/spreadsheets/d/1_WpQB6tO1jOml9DtfJFx0vOLa2Xt9UEE6FaugNa8b3s/gviz/tq?tqx=out:csv&gid="
+# фото, вставленные в ячейку «Картинка», в CSV не попадают — их видно только в HTML-виде таблицы
+HTMLVIEW = "https://docs.google.com/spreadsheets/d/1_WpQB6tO1jOml9DtfJFx0vOLa2Xt9UEE6FaugNa8b3s/htmlview/sheet?headers=true&gid="
 TABS = {"Deante": "1104453248", "Deante кухня": "749813629", "KK POL": "520941540"}
 # склады поставщика — показываются только на этих вкладках; «В пути» и «Польша» не считаются наличием
 STORES = [("Санкт-Петербург", r"Остаток.*СПБ", False), ("Москва", r"Остаток.*(МОСКВА|МСК)", False),
@@ -86,8 +88,23 @@ def is_url(s, kind=""):
     return bool(re.match(r"https?://\S+$", s or "")) and (not kind or re.search(kind, s, re.I))
 
 
+def pictures(gid):
+    """Код товара → фото из ячейки «Картинка» (800 px)."""
+    out, code_col = {}, None
+    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", get(HTMLVIEW + gid), re.S):
+        cells = [clean(re.sub(r"<[^>]+>", "", c)) for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
+        if code_col is None:
+            code_col = cells.index("Код") if "Код" in cells else None
+            continue
+        img = re.search(r'src="(https://docs\.google\.com/sheets-images-rt/[^"=]+)', row)
+        if img and code_col < len(cells) and cells[code_col]:
+            out.setdefault(cells[code_col], img.group(1) + "=s800")
+    return out
+
+
 def read(name):
     text = get(SHEET + TABS[name])
+    pics = pictures(TABS[name])
     rows = list(csv.reader(io.StringIO(text)))
     head, rows = rows[0], [r + [""] * (len(rows[0]) - len(r)) for r in rows[1:] if any(c.strip() for c in r)]
     c = lambda start: col(head, re.escape(start) + ("$" if start in EXACT else ""))  # noqa: E731
@@ -134,7 +151,9 @@ def read(name):
                      "rub": round(price, 2), "sub": clean(r[sub_col]) if sub_col is not None else "", "group": group},
             # у KK POL второй код в скобках («SPP/105/0/K (350/PPB/097-00-00)») — по нему фото в AMANA_Site
             "codes": [sku] + re.findall(r"[\w.\-]+/[\w.\-]+/[\w.\-/]+", r[ci["Артикул"]] + " " + r[ci["Наименование"]]),
-            "photos": [p for p in photos if is_url(p, r"\.(jpe?g|png|webp)(\?|$)")],
+            # своё фото из таблицы — главное; ссылки на фото — только если его нет (обычно это то же фото)
+            "photos": ([pics[clean(r[ci["Код"]])]] + [p for p in photos[1:] if name == "KK POL" and is_url(p, r"\.(jpe?g|png|webp)(\?|$)")]
+                       if clean(r[ci["Код"]]) in pics else [p for p in photos if is_url(p, r"\.(jpe?g|png|webp)(\?|$)")]),
             "card": {"title": "", "text": text, "docs": docs, "specs": specs,
                      "url": r[ci["Ссылка на сайт"]].strip() if ci["Ссылка на сайт"] is not None and is_url(r[ci["Ссылка на сайт"]].strip()) else ""},
             "stock": {s: number(r[n]) or 0 for s, n in stores.items() if n is not None},
@@ -143,7 +162,8 @@ def read(name):
 
 
 def fetch(url, prefix):
-    ext = re.search(r"\.(jpe?g|png|webp)", url, re.I).group(1).lower().replace("jpeg", "jpg")
+    m = re.search(r"\.(jpe?g|png|webp)", url, re.I)
+    ext = m.group(1).lower().replace("jpeg", "jpg") if m else "jpg"  # у фото из ячеек расширения нет; формат проверяется ниже
     dst = WWW / "img" / f"{prefix}-{hashlib.md5(url.encode()).hexdigest()[:12]}.{ext}"
     for f in (dst, dst.with_suffix(".webp")):
         if f.exists():
