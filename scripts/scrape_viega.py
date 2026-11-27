@@ -2,7 +2,8 @@
 
 Запуск: python scripts/scrape_viega.py
 Ищет артикул через поиск сайта и берёт фото, в имени файла которых есть этот артикул
-(например PPm3291i268190v01.jpg) — так фото точно относится к позиции, а не к соседней.
+(например PPm3291i268190v01.jpg). Если такого нет, но поиск нашёл ровно один товар, берёт его фото:
+Viega снимает модель целиком, и у других размеров той же модели фото общее.
 Дописывает www/catalog.js; позиции, у которых фото уже есть, не трогает.
 """
 import json
@@ -30,6 +31,9 @@ def main():
         page = get(url)
         time.sleep(0.3)
         pics = re.findall(r"https://omnisan\.storage\.yandexcloud\.net/[^\"' )]*/crop/orig/900/[^\"' )]*?[A-Za-z]" + re.escape(sku) + r"v\d+[^\"' )]*\.(?:jpe?g|png|webp)", page)
+        if not pics and re.search(r"найдено 1&nbsp;товар", page):
+            # Viega снимает модель, а не размер: у единственного найденного товара фото с артикулом соседнего размера
+            pics = re.findall(r"https://omnisan\.storage\.yandexcloud\.net/[^\"' )]*/crop/orig/900/[^\"' )]*?\.(?:jpe?g|png|webp)", page)
         files = []
         for src in dict.fromkeys(pics):
             f = WWW / "img" / ("viega-" + Path(urllib.parse.urlparse(src).path).name.lower())

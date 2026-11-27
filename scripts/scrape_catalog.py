@@ -78,7 +78,11 @@ def crawl():
         if path in seen:
             continue
         seen.add(path)
-        page = get(BASE + path)
+        try:
+            page = get(BASE + path)
+        except Exception as e:  # один сбой связи не должен обрывать обход всего сайта
+            print(f"  ! {path}: {e}")
+            continue
         time.sleep(0.3)
         p = parse_product(page)
         if p:
@@ -113,7 +117,11 @@ def main(base=BASE):
             key = m.group(2) or f"{m.group(1)}-{Path(src).stem}"
             f = WWW / "img" / (key + Path(src).suffix.lower())
             if not f.exists():
-                f.write_bytes(get(BASE + urllib.parse.quote(src), binary=True))
+                try:
+                    f.write_bytes(get(BASE + urllib.parse.quote(src), binary=True))
+                except Exception as e:
+                    print(f"  ! {src}: {e}")
+                    continue
                 time.sleep(0.2)
             files.append(f"img/{f.name}")
         catalog[sku] = {"title": p["title"], "text": p["text"], "images": files, "docs": p["docs"], "url": p["url"]}
