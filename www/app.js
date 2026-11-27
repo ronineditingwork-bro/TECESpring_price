@@ -1,7 +1,7 @@
-const { title, rate, sections } = window.PRICE;
+const SHEETS = window.PRICE.sheets; // вкладки прайса: TECE, TECEspring, Uranum, BWT, Poloplast, Conex Banninger, Viega
 const CATALOG = window.CATALOG || {};
 const STORES = window.STOCK?.stores || []; // склады: Ростов-на-Дону, Москва
-const bySku = new Map(sections.flatMap((s) => s.items.map((i) => [i.sku, i])));
+const bySku = new Map(SHEETS.flatMap((s, si) => s.groups.flatMap((g) => g.items.map((i) => [i.sku, { ...i, sheet: si, group: g.name }]))));
 const rub = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const num = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 });
 const $ = (id) => document.getElementById(id);
@@ -23,7 +23,8 @@ const store = {
 
 let cart = store.get("cart", {});
 for (const sku of Object.keys(cart)) if (!bySku.has(sku)) delete cart[sku]; // позиция ушла из нового прайса
-let section = "";
+let section = "", activeSheet; // группа внутри вкладки и сама вкладка (null — главный экран); undefined — ещё не нарисовано
+const plural = (n, f) => { const t = n % 100, o = n % 10; return f[t > 10 && t < 20 ? 2 : o === 1 ? 0 : o > 1 && o < 5 ? 1 : 2]; };
 
 function esc(s) {
   return String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -57,35 +58,75 @@ function stockLine(sku) {
   return `<div class="stock">${STORES.map((s) => { const n = s.items[sku] || 0; return `<span class="${n > 0 ? "y" : ""}">${esc(city(s.name))} <b>${num.format(n)}</b></span>`; }).join("")}</div>`;
 }
 
-// ---------- каталог ----------
+// ---------- каталог: главный экран — вкладки прайса, внутри вкладки — группы ----------
+function tile(i) {
+  return `
+    <article class="tile">
+      <a href="#p=${encodeURIComponent(i.sku)}" data-sku="${esc(i.sku)}">
+        <div class="ph">${img(i.sku) ? `<img src="${esc(img(i.sku))}" alt="" loading="lazy">` : '<span class="noimg"></span>'}</div>
+        <div class="body">
+          <span class="name">${esc(i.name)}</span>
+          <span class="sku">${esc(i.sku)}</span>
+          ${stockLine(i.sku)}
+          <span class="price">${rub.format(i.rub)} ₽</span>
+        </div>
+      </a>
+      <button type="button" class="add" data-add="${esc(i.sku)}" aria-label="В корзину: ${esc(i.name)}">${ICON.plus}</button>
+    </article>`;
+}
+
 function renderTabs() {
-  const tabs = [["", "Все товары"], ...sections.map((s) => [s.name, s.name])];
+  const sheet = SHEETS[activeSheet];
+  const tabs = sheet ? [["", "Все группы"], ...sheet.groups.map((g) => [g.name, g.name])] : [];
   $("tabs").innerHTML = tabs.map(([v, l]) => `<button type="button" role="tab" data-tab="${esc(v)}" aria-selected="${v === section}">${esc(l)}</button>`).join("");
 }
 
+function renderHome() {
+  $("list").innerHTML = `<div class="sheets">${SHEETS.map((s, n) => {
+    const items = s.groups.flatMap((g) => g.items);
+    const cover = items.map((i) => img(i.sku)).find(Boolean);
+    return `<a class="sheet" href="#s=${n}">
+      <div class="ph">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : `<span class="word">${esc(s.name)}</span>`}</div>
+      <div class="body"><b>${esc(s.name)}</b><span>${items.length} ${plural(items.length, ["позиция", "позиции", "позиций"])}, ${s.groups.length} ${plural(s.groups.length, ["группа", "группы", "групп"])}</span></div>
+    </a>`;
+  }).join("")}</div>`;
+}
+
+const RESULTS = 120; // shortcut: поиск показывает первые 120 совпадений; если станет мало — добавить «Показать ещё»
 function renderList() {
-  const q = $("q").value.trim().toLowerCase();
+  const words = $("q").value.trim().toLowerCase().split(/\s+/).filter(Boolean);
   const onlyStock = $("in-stock").checked;
-  $("list").innerHTML = sections
-    .filter((s) => !section || s.name === section)
-    .map((s) => {
-      const items = s.items.filter((i) => (!q || i.name.toLowerCase().includes(q) || i.sku.toLowerCase().includes(q)) && (!onlyStock || stock(i.sku) > 0));
-      if (!items.length) return "";
-      return `<h2>${esc(s.name)}</h2><div class="grid">${items.map((i) => `
-        <article class="tile">
-          <a href="#p=${encodeURIComponent(i.sku)}" data-sku="${esc(i.sku)}">
-            <div class="ph">${img(i.sku) ? `<img src="${esc(img(i.sku))}" alt="" loading="lazy">` : '<span class="noimg"></span>'}</div>
-            <div class="body">
-              <span class="name">${esc(i.name)}</span>
-              <span class="sku">${esc(i.sku)}</span>
-              ${stockLine(i.sku)}
-              <span class="price">${rub.format(i.rub)} ₽</span>
-            </div>
-          </a>
-          <button type="button" class="add" data-add="${esc(i.sku)}" aria-label="В корзину: ${esc(i.name)}">${ICON.plus}</button>
-        </article>`).join("")}</div>`;
-    })
-    .join("") || `<div class="empty">Ничего не найдено. Проверьте артикул или выберите «Все товары».</div>`;
+  const sheet = SHEETS[activeSheet];
+  const searching = words.length > 0;
+  $("ptitle").textContent = searching ? "Поиск по каталогу" : sheet ? sheet.name : "Каталог";
+  $("tabs").hidden = !sheet || searching;
+  $("filterline").hidden = !sheet && !searching;
+  $("meta").textContent = sheet && !searching ? `${sheet.title.replace(/^Розничный прайс-лист/, "Прайс")}`.replace(/\s*\(вкл\. НДС (\d+%)\)/, ", цены с НДС $1") : "";
+  if (!sheet && !searching) return renderHome();
+  const ok = (i) => (!onlyStock || stock(i.sku) > 0) && words.every((w) => (i.name + " " + i.sku).toLowerCase().includes(w));
+  let html = "", shown = 0;
+  if (searching) {
+    for (const s of SHEETS) {
+      const items = s.groups.flatMap((g) => g.items).filter(ok).slice(0, RESULTS - shown);
+      if (items.length) html += `<h2>${esc(s.name)}</h2><div class="grid">${items.map(tile).join("")}</div>`;
+      shown += items.length;
+      if (shown >= RESULTS) { html += `<p class="note more">Показаны первые ${RESULTS} совпадений. Уточните запрос, например добавьте размер.</p>`; break; }
+    }
+  } else {
+    for (const g of sheet.groups.filter((g) => !section || g.name === section)) {
+      const items = g.items.filter(ok);
+      if (!items.length) continue;
+      html += `<h2>${esc(g.name)}</h2>`;
+      // подгруппы — как в прайсе, заголовком над своими позициями
+      let open = false, last = null;
+      for (const i of items) {
+        if (i.sub !== last) { html += `${open ? "</div>" : ""}${i.sub ? `<h3>${esc(i.sub)}</h3>` : ""}<div class="grid">`; open = true; last = i.sub; }
+        html += tile(i);
+      }
+      html += "</div>";
+    }
+  }
+  $("list").innerHTML = html || `<div class="empty">Ничего не найдено. Проверьте артикул${onlyStock ? " или выключите «Только в наличии»" : ""}.</div>`;
 }
 
 // ---------- карточка товара ----------
@@ -98,9 +139,9 @@ function renderCard(sku) {
     <div class="gallery" id="gal">${slides}</div>
     <div class="dots" id="gdots"></div>
     <div class="panel" style="margin-top:12px">
-      <p class="sku-line">Артикул ${esc(i.sku)}</p>
+      <p class="sku-line"><a href="#s=${i.sheet}">${esc(SHEETS[i.sheet].name)}</a>, ${esc(i.group)}. Артикул ${esc(i.sku)}</p>
       <h1 class="title">${esc(i.name)}</h1>
-      <p class="bigprice">${rub.format(i.rub)} ₽<small>${num.format(i.eur)} € за ${esc(i.unit)}, с НДС</small></p>
+      <p class="bigprice">${rub.format(i.rub)} ₽<small>${i.eur != null ? `${num.format(i.eur)} € ` : ""}за ${esc(i.unit)}, с НДС</small></p>
       ${STORES.length ? `<div class="wh">${STORES.map((s) => { const n = s.items[sku] || 0; return `<div>${esc(s.name)}<b class="${n > 0 ? "" : "no"}">${n > 0 ? `${num.format(n)} ${esc(i.unit)}` : "нет"}</b><small>на ${esc(s.date)}</small></div>`; }).join("")}</div>` : ""}
       <div class="buy">
         <span class="stepper"><button type="button" data-step="-1" aria-label="Меньше">−</button><input id="addQty" type="number" inputmode="numeric" min="1" value="1" aria-label="Количество, ${esc(i.unit)}"><button type="button" data-step="1" aria-label="Больше">+</button></span>
@@ -248,16 +289,18 @@ window.onPdf = (err, file) => {
 const wide = matchMedia("(min-width: 700px)");
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
 const PANES = ["catalog", "card", "cart", "doc"];
-const PARENT = { card: "", cart: "", doc: "cart" }; // куда ведёт «Назад», если приложение открыли сразу на этом экране
+// куда ведёт «Назад», если приложение открыли сразу на этом экране
+const parentOf = (v) => v.view === "card" ? `s=${bySku.get(v.sku).sheet}` : v.view === "doc" ? "cart" : "";
 const trail = []; // экраны, пройденные в этом запуске, — чтобы «Назад» знал, есть ли куда возвращаться
-let current = { view: "catalog", sku: null }, catalogScroll = 0;
+let current = { view: "catalog", sheet: null }, scrolls = {}; // прокрутка каждого экрана каталога
 
 function parse(hash) {
   const h = decodeURIComponent(hash.replace(/^#/, ""));
   if (h === "cart") return { view: "cart" };
   if (h.startsWith("p=") && bySku.has(h.slice(2))) return { view: "card", sku: h.slice(2) };
   if (h.startsWith("doc/")) return { view: "doc", kind: h.slice(4) };
-  return { view: "catalog" };
+  if (h.startsWith("s=") && SHEETS[+h.slice(2)]) return { view: "catalog", sheet: +h.slice(2) };
+  return { view: "catalog", sheet: null };
 }
 
 // экраны переключаются через адрес (#, #cart, #p=артикул, #doc/quote), поэтому работают и кнопка «Назад», и жест на Android и iPhone
@@ -266,16 +309,22 @@ function route() {
   if (next.view === "card") renderCard(next.sku);
   if (next.view === "doc" && !renderDoc(next.kind)) next = { view: "cart" };
   if (next.view === "cart" || wide.matches) renderCart();
-  if (current.view === "catalog" && next.view !== "catalog") catalogScroll = scrollY;
+  const key = (v) => "s" + v.sheet;
+  if (current.view === "catalog") scrolls[key(current)] = scrollY;
+  if (next.view === "catalog" && next.sheet !== activeSheet) {
+    activeSheet = next.sheet; section = "";
+    renderTabs(); renderList();
+  }
   if (wide.matches) {
     const right = next.view === "catalog" ? "cart" : next.view;
     for (const id of PANES) $(id).hidden = id !== "catalog" && id !== right;
     $(right).scrollTop = 0;
   } else {
     for (const id of PANES) $(id).hidden = id !== next.view;
-    scrollTo(0, next.view === "catalog" ? catalogScroll : 0);
+    scrollTo(0, next.view === "catalog" ? scrolls[key(next)] || 0 : 0);
   }
-  $("back").hidden = wide.matches ? !["card", "doc"].includes(next.view) : next.view === "catalog";
+  const home = next.view === "catalog" && next.sheet === null;
+  $("back").hidden = home || (wide.matches && next.view === "cart");
   document.body.dataset.view = next.view;
   const inCart = next.view === "cart" || next.view === "doc";
   $("nav-catalog").classList.toggle("on", !inCart);
@@ -306,12 +355,10 @@ function navigate() {
 
 function back() {
   if (trail.length > 1) history.back();
-  else location.replace("#" + (PARENT[current.view] ?? ""));
+  else location.replace("#" + parentOf(current));
 }
 
 // ---------- события ----------
-$("meta").textContent = `Прайс ${(title.match(/\d{2}\/\d{4}/) || [""])[0]}, цены с НДС, 1 € = ${num.format(rate)} ₽`;
-renderTabs();
 $("q").addEventListener("input", renderList);
 $("in-stock").addEventListener("change", renderList);
 $("back").addEventListener("click", back);
@@ -338,6 +385,5 @@ addEventListener("hashchange", navigate);
 wide.addEventListener("change", route); // сложили или разложили телефон
 
 save();
-renderList();
 trail.push(location.hash);
 route();

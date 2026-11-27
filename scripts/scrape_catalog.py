@@ -31,7 +31,7 @@ def get(url, binary=False):
 def price_skus():
     src = (WWW / "price.js").read_text(encoding="utf-8")
     data = json.loads(src[src.index("{"): src.rindex("}") + 1])
-    return {i["sku"] for s in data["sections"] for i in s["items"]}
+    return {i["sku"] for s in data["sheets"] for g in s["groups"] for i in g["items"]}
 
 
 def text_of(fragment):
@@ -74,7 +74,7 @@ def crawl():
     seen, queue, products = set(), ["/catalog/"], {}
     while queue:
         path = queue.pop(0)
-        if path in seen or "/sistemy_truboprovodov/" in path:  # трубопроводы не входят во вкладку
+        if path in seen:
             continue
         seen.add(path)
         page = get(BASE + path)

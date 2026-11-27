@@ -1,4 +1,1012 @@
 window.CATALOG = {
+ "713316S": {
+  "title": "Концовка разборная TECEspring AX для универсальной трубы",
+  "text": "Для подключения многослойных композитных труб к Евроконусу 3/4\" НР. Предназначена только для монтажа систем отопления.",
+  "images": [
+   "img/vgy31gkjd84nleombl919kuwg8i6c3v3.jpg",
+   "img/l5p7j9ygttm05dnqvo4ltjpx1wlwirwo.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/kontsovka_razbo546546rnaya_tecespring_ax_dlya_universalnoy_truby/"
+ },
+ "713320S": {
+  "title": "Концовка разборная TECEspring AX для универсальной трубы",
+  "text": "Для подключения многослойных композитных труб к Евроконусу 3/4\" НР. Предназначена только для монтажа систем отопления.",
+  "images": [
+   "img/vgy31gkjd84nleombl919kuwg8i6c3v3.jpg",
+   "img/l5p7j9ygttm05dnqvo4ltjpx1wlwirwo.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/kontsovka_razbo546546rnaya_tecespring_ax_dlya_universalnoy_truby/"
+ },
+ "714016S": {
+  "title": "Монтажная трубка TECEspring AX для подключения радиаторов конечная, 15 мм, медная никелированная",
+  "text": "Для подключения компактных радиаторов со встроенными вентилями, напольный, медный никелированный.",
+  "images": [
+   "img/1tfc33mfuwjmq5u1ehwpvwhr2exn5ush.jpg",
+   "img/mc7jz0f95a2970gnurg66xq8s536l43h.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mon00tazhnaya_trubka_teces765765pring_ax_dlya_podklyucheniya_radiatorov_konechnaya_15_mm_mednaya_nikelirovan/"
+ },
+ "714020S": {
+  "title": "Монтажная трубка TECEspring AX для подключения радиаторов конечная, 15 мм, медная никелированная",
+  "text": "Для подключения компактных радиаторов со встроенными вентилями, напольный, медный никелированный.",
+  "images": [
+   "img/1tfc33mfuwjmq5u1ehwpvwhr2exn5ush.jpg",
+   "img/mc7jz0f95a2970gnurg66xq8s536l43h.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mon00tazhnaya_trubka_teces765765pring_ax_dlya_podklyucheniya_radiatorov_konechnaya_15_mm_mednaya_nikelirovan/"
+ },
+ "714027S": {
+  "title": "Монтажная трубка TECEspring AX для подключения радиаторов конечная, 15 мм, медная никелированная",
+  "text": "Для подключения компактных радиаторов со встроенными вентилями, напольный, медный никелированный.",
+  "images": [
+   "img/1tfc33mfuwjmq5u1ehwpvwhr2exn5ush.jpg",
+   "img/mc7jz0f95a2970gnurg66xq8s536l43h.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mon00tazhnaya_trubka_teces765765pring_ax_dlya_podklyucheniya_radiatorov_konechnaya_15_mm_mednaya_nikelirovan/"
+ },
+ "714901S": {
+  "title": "Монтажный узел TECEspring AX для подключения радиаторов, напольный, никелированный",
+  "text": "Для подключения компактных радиаторов со встроенными вентилями, напольный, медный никелированный.",
+  "images": [
+   "img/otedplwm466estk4jq4n02bfvnlwn4m3.jpg",
+   "img/rqrlut57prwwuk4c8cgz25wygrjezh2h.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/montazhnyy_uzel_tece34534354spring_ax_dlya_podklyucheniya_radiatorov_napolnyy_nikelirovannyy/"
+ },
+ "714905S": {
+  "title": "Монтажный узел TECEspring AX для подключения радиаторов, настенный, никелированный",
+  "text": "Для подключения компактных радиаторов со встроенными вентилями, настенный, медный никелированный.",
+  "images": [
+   "img/w0lu3sgh5aciq2mv4twi3zvvyzzui37m.jpg",
+   "img/632b1l5ze8wc262plao4ruiyx20lt4y5.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/montazhn3455yy_uzel_teces345pring_ax_dlya_podklyucheniya_radiatorov_nastennyy_nikelirovannyy/"
+ },
+ "720093S": {
+  "title": "Ножницы для резки труб TECEspring",
+  "text": "Для резки трубы TECEspring AX используйте только ножницы для труб.",
+  "images": [
+   "img/bt7zvbmbp8b2rhdxamofot8u0qoheh3o.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/nozh234nitsy_dly2324a_rezki_trub_tecespring/"
+ },
+ "720203S": {
+  "title": "Комплект инструментов TECEspring AX",
+  "text": "Комплектация набора ручных инструментов:\n\n• Ручной расширитель\n\n• Сменные расширительные головки Ø 16–32 мм\n\n• Ручной запрессовщик\n\n• Сменные насадки для запрессовки для труб Ø 16–32 мм\n\n• Ножницы для резки труб\n\n• Чемодан",
+  "images": [
+   "img/5pbwrmy2jjmida0gv9nykva5f5yy6dyi.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/komple3455kt_instrumentov34535_tecespring_ax/"
+ },
+ "732016S": {
+  "title": "Многослойная композитная труба TECEspring PE-Xc/Al/PE-RT",
+  "text": "Композитная труба TECEspring AX одинаково подходит для систем водоснабжения и систем радиаторного отопления, а также для монтажа систем сжатого воздуха.\n\nКомпозитная труба TECEspring AX представляет собой универсальную трубу, которая сочетает лучшие свойства металлических и пластиковых труб.\n\nОсновой многослойной конструкции является внутренняя несущая труба из полиэтилена, сшитого электронно-лучевым методом (PE-Xc). Это обеспечивает высокую стойкость к давлению, температуре и коррозии. Дополнительный сваренный встык алюминиевый слой предотвращает диффузию, уменьшая при этом линейную термическую деформацию.\n\nКомпозитная труба TECEspring AX легко гнется руками, сохраняя при этом форму и жесткость.\n\nТруба соответствует классам применения в соответствии с ГОСТ Р 53630-2015 класса 2/10 бар для монтажа систем водоснабжения и класса 5/10 бар для монтажа систем отопления.",
+  "images": [
+   "img/aisljg6lue3tg7gn687x9owhx3qi0bse.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mnogosloynaya_kompozitnaya_truba_tecespring_pe_xc_al_pe_rt/"
+ },
+ "732020S": {
+  "title": "Многослойная композитная труба TECEspring PE-Xc/Al/PE-RT",
+  "text": "Композитная труба TECEspring AX одинаково подходит для систем водоснабжения и систем радиаторного отопления, а также для монтажа систем сжатого воздуха.\n\nКомпозитная труба TECEspring AX представляет собой универсальную трубу, которая сочетает лучшие свойства металлических и пластиковых труб.\n\nОсновой многослойной конструкции является внутренняя несущая труба из полиэтилена, сшитого электронно-лучевым методом (PE-Xc). Это обеспечивает высокую стойкость к давлению, температуре и коррозии. Дополнительный сваренный встык алюминиевый слой предотвращает диффузию, уменьшая при этом линейную термическую деформацию.\n\nКомпозитная труба TECEspring AX легко гнется руками, сохраняя при этом форму и жесткость.\n\nТруба соответствует классам применения в соответствии с ГОСТ Р 53630-2015 класса 2/10 бар для монтажа систем водоснабжения и класса 5/10 бар для монтажа систем отопления.",
+  "images": [
+   "img/aisljg6lue3tg7gn687x9owhx3qi0bse.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mnogosloynaya_kompozitnaya_truba_tecespring_pe_xc_al_pe_rt/"
+ },
+ "732025S": {
+  "title": "Многослойная композитная труба TECEspring PE-Xc/Al/PE-RT",
+  "text": "Композитная труба TECEspring AX одинаково подходит для систем водоснабжения и систем радиаторного отопления, а также для монтажа систем сжатого воздуха.\n\nКомпозитная труба TECEspring AX представляет собой универсальную трубу, которая сочетает лучшие свойства металлических и пластиковых труб.\n\nОсновой многослойной конструкции является внутренняя несущая труба из полиэтилена, сшитого электронно-лучевым методом (PE-Xc). Это обеспечивает высокую стойкость к давлению, температуре и коррозии. Дополнительный сваренный встык алюминиевый слой предотвращает диффузию, уменьшая при этом линейную термическую деформацию.\n\nКомпозитная труба TECEspring AX легко гнется руками, сохраняя при этом форму и жесткость.\n\nТруба соответствует классам применения в соответствии с ГОСТ Р 53630-2015 класса 2/10 бар для монтажа систем водоснабжения и класса 5/10 бар для монтажа систем отопления.",
+  "images": [
+   "img/aisljg6lue3tg7gn687x9owhx3qi0bse.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mnogosloynaya_kompozitnaya_truba_tecespring_pe_xc_al_pe_rt/"
+ },
+ "732032S": {
+  "title": "Многослойная композитная труба TECEspring PE-Xc/Al/PE-RT",
+  "text": "Композитная труба TECEspring AX одинаково подходит для систем водоснабжения и систем радиаторного отопления, а также для монтажа систем сжатого воздуха.\n\nКомпозитная труба TECEspring AX представляет собой универсальную трубу, которая сочетает лучшие свойства металлических и пластиковых труб.\n\nОсновой многослойной конструкции является внутренняя несущая труба из полиэтилена, сшитого электронно-лучевым методом (PE-Xc). Это обеспечивает высокую стойкость к давлению, температуре и коррозии. Дополнительный сваренный встык алюминиевый слой предотвращает диффузию, уменьшая при этом линейную термическую деформацию.\n\nКомпозитная труба TECEspring AX легко гнется руками, сохраняя при этом форму и жесткость.\n\nТруба соответствует классам применения в соответствии с ГОСТ Р 53630-2015 класса 2/10 бар для монтажа систем водоснабжения и класса 5/10 бар для монтажа систем отопления.",
+  "images": [
+   "img/aisljg6lue3tg7gn687x9owhx3qi0bse.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/mnogosloynaya_kompozitnaya_truba_tecespring_pe_xc_al_pe_rt/"
+ },
+ "734516S": {
+  "title": "Пресс-втулка TECEspring AX для универсальной многослойной трубы",
+  "text": "Пресс-втулка предназначена для пресс-соединения с многослойными композитными трубами TECEspring AX.\n\nОбратите внимание:\n\nОбязательно заказывайте пресс-втулки отдельно от фитингов!",
+  "images": [
+   "img/z54pqh9yf20wgw10uur66s9a6qz7l8v5.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/pres435s_vtulka_tec4564espring_ax_dlya_universalnoy_mnogosloynoy_truby/"
+ },
+ "734520S": {
+  "title": "Пресс-втулка TECEspring AX для универсальной многослойной трубы",
+  "text": "Пресс-втулка предназначена для пресс-соединения с многослойными композитными трубами TECEspring AX.\n\nОбратите внимание:\n\nОбязательно заказывайте пресс-втулки отдельно от фитингов!",
+  "images": [
+   "img/z54pqh9yf20wgw10uur66s9a6qz7l8v5.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/pres435s_vtulka_tec4564espring_ax_dlya_universalnoy_mnogosloynoy_truby/"
+ },
+ "734525S": {
+  "title": "Пресс-втулка TECEspring AX для универсальной многослойной трубы",
+  "text": "Пресс-втулка предназначена для пресс-соединения с многослойными композитными трубами TECEspring AX.\n\nОбратите внимание:\n\nОбязательно заказывайте пресс-втулки отдельно от фитингов!",
+  "images": [
+   "img/z54pqh9yf20wgw10uur66s9a6qz7l8v5.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/pres435s_vtulka_tec4564espring_ax_dlya_universalnoy_mnogosloynoy_truby/"
+ },
+ "734532S": {
+  "title": "Пресс-втулка TECEspring AX для универсальной многослойной трубы",
+  "text": "Пресс-втулка предназначена для пресс-соединения с многослойными композитными трубами TECEspring AX.\n\nОбратите внимание:\n\nОбязательно заказывайте пресс-втулки отдельно от фитингов!",
+  "images": [
+   "img/z54pqh9yf20wgw10uur66s9a6qz7l8v5.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/pres435s_vtulka_tec4564espring_ax_dlya_universalnoy_mnogosloynoy_truby/"
+ },
+ "740131S": {
+  "title": "Фреза TECEspring для настенных уголков",
+  "text": "Для подрезания выступающей части настенного уголка после чистовой отделки.",
+  "images": [
+   "img/phufetwxspms3z8ekalgermghurkjfqx.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/freza_tece345spring_dlya_nastennykh_ugolkov/"
+ },
+ "760016S": {
+  "title": "Тройник TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/m1xvx881g1fhencfd8r0px1riydou578.jpg",
+   "img/thxllnu3freqfinp9u8r2mew7r1uoz5l.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tece3456346spring_ax/"
+ },
+ "760020S": {
+  "title": "Тройник TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/m1xvx881g1fhencfd8r0px1riydou578.jpg",
+   "img/thxllnu3freqfinp9u8r2mew7r1uoz5l.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tece3456346spring_ax/"
+ },
+ "760025S": {
+  "title": "Тройник TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/m1xvx881g1fhencfd8r0px1riydou578.jpg",
+   "img/thxllnu3freqfinp9u8r2mew7r1uoz5l.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tece3456346spring_ax/"
+ },
+ "760032S": {
+  "title": "Тройник TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/m1xvx881g1fhencfd8r0px1riydou578.jpg",
+   "img/thxllnu3freqfinp9u8r2mew7r1uoz5l.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tece3456346spring_ax/"
+ },
+ "760504S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760508S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760509S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760511S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760514S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760515S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760516S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760518S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760519S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760520S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760521S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760522S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760523S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760527S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760528S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760537S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "760544S": {
+  "title": "Тройник редукционный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3im9e8wdvpttnwtd292no7pedop1f43.jpg",
+   "img/4wsocn5p4zfjx1i2jpk09iyo55sd2end.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_redukts54645645ionnyy_tecespring_ax/"
+ },
+ "763616S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой Евроконус 3/4\"",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/b31on6z01pwyynzmhc41r120vognwzyc.jpg",
+   "img/r503t4ei0jl0z3vso5gvt9y7kmvv9cz3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_prya3254253moe_tecespring_ax_s_naki232dnoy_gaykoy_evrokonus_3_4/"
+ },
+ "763620S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой Евроконус 3/4\"",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/b31on6z01pwyynzmhc41r120vognwzyc.jpg",
+   "img/r503t4ei0jl0z3vso5gvt9y7kmvv9cz3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_prya3254253moe_tecespring_ax_s_naki232dnoy_gaykoy_evrokonus_3_4/"
+ },
+ "765002S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765003S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765004S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765007S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765008S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765009S": {
+  "title": "Соединение прямое TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/0zqetniadfc9tvcs61xosnbays38zcxd.jpg",
+   "img/g4qh4cl53f4citegue72tpjqbbb9y0z7.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_pryamoe_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "765116S": {
+  "title": "Заглушка TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/tteftu7575n0iq15kem3bjh04a82zwo0.png",
+   "img/jnc2657g26n99s7tfbsjv0klrfea46up.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/zaglus435345hka_tecespr45ing_ax/"
+ },
+ "765120S": {
+  "title": "Заглушка TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/tteftu7575n0iq15kem3bjh04a82zwo0.png",
+   "img/jnc2657g26n99s7tfbsjv0klrfea46up.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/zaglus435345hka_tecespr45ing_ax/"
+ },
+ "765502S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765503S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765504S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765506S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765507S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765508S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765509S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "765510S": {
+  "title": "Соединение прямое TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xbsw2ul5on53zzi10hcf72qnfp107kxl.jpg",
+   "img/3gxsx3gnuazn5r6ovt5izoubj068e054.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedin345enie_pr4556yamoe_tecespring_ax_s_nippelem/"
+ },
+ "766016S": {
+  "title": "Соединение труба-труба TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xx1btom2nnw6ltkeptjp3vtqb3dd7myg.jpg",
+   "img/lvmgvmvlpih7vhp5c2v6rbafyksm2310.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_truba_truba_tecespring_ax/"
+ },
+ "766020S": {
+  "title": "Соединение труба-труба TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xx1btom2nnw6ltkeptjp3vtqb3dd7myg.jpg",
+   "img/lvmgvmvlpih7vhp5c2v6rbafyksm2310.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_truba_truba_tecespring_ax/"
+ },
+ "766025S": {
+  "title": "Соединение труба-труба TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xx1btom2nnw6ltkeptjp3vtqb3dd7myg.jpg",
+   "img/lvmgvmvlpih7vhp5c2v6rbafyksm2310.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_truba_truba_tecespring_ax/"
+ },
+ "766032S": {
+  "title": "Соединение труба-труба TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xx1btom2nnw6ltkeptjp3vtqb3dd7myg.jpg",
+   "img/lvmgvmvlpih7vhp5c2v6rbafyksm2310.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinenie_truba_truba_tecespring_ax/"
+ },
+ "766503S": {
+  "title": "Соединение труба-труба TECEspring AX редукционное",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/ytm6uwomwvikp9cc6o945oaqulnq1oy3.jpg",
+   "img/d4sa0pm0gjtd474l8f9iocpb922oyjvz.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedi34nenie_truba_trub34a_tecespr43ing_ax_reduktsionnoe/"
+ },
+ "766504S": {
+  "title": "Соединение труба-труба TECEspring AX редукционное",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/ytm6uwomwvikp9cc6o945oaqulnq1oy3.jpg",
+   "img/d4sa0pm0gjtd474l8f9iocpb922oyjvz.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedi34nenie_truba_trub34a_tecespr43ing_ax_reduktsionnoe/"
+ },
+ "766505S": {
+  "title": "Соединение труба-труба TECEspring AX редукционное",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/ytm6uwomwvikp9cc6o945oaqulnq1oy3.jpg",
+   "img/d4sa0pm0gjtd474l8f9iocpb922oyjvz.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedi34nenie_truba_trub34a_tecespr43ing_ax_reduktsionnoe/"
+ },
+ "766506S": {
+  "title": "Соединение труба-труба TECEspring AX редукционное",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/ytm6uwomwvikp9cc6o945oaqulnq1oy3.jpg",
+   "img/d4sa0pm0gjtd474l8f9iocpb922oyjvz.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedi34nenie_truba_trub34a_tecespr43ing_ax_reduktsionnoe/"
+ },
+ "766507S": {
+  "title": "Соединение труба-труба TECEspring AX редукционное",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/ytm6uwomwvikp9cc6o945oaqulnq1oy3.jpg",
+   "img/d4sa0pm0gjtd474l8f9iocpb922oyjvz.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedi34nenie_truba_trub34a_tecespr43ing_ax_reduktsionnoe/"
+ },
+ "767016S": {
+  "title": "Уголок соединительный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/rf5e5vb02k7oo3rxr5uopffm9dh8vwl7.jpg",
+   "img/7ymdwpavargn0j6mgi7933nst3ndnphc.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugo324lok_soed345initelnyy_tecespring_ax/"
+ },
+ "767020S": {
+  "title": "Уголок соединительный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/rf5e5vb02k7oo3rxr5uopffm9dh8vwl7.jpg",
+   "img/7ymdwpavargn0j6mgi7933nst3ndnphc.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugo324lok_soed345initelnyy_tecespring_ax/"
+ },
+ "767025S": {
+  "title": "Уголок соединительный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/rf5e5vb02k7oo3rxr5uopffm9dh8vwl7.jpg",
+   "img/7ymdwpavargn0j6mgi7933nst3ndnphc.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugo324lok_soed345initelnyy_tecespring_ax/"
+ },
+ "767032S": {
+  "title": "Уголок соединительный TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/rf5e5vb02k7oo3rxr5uopffm9dh8vwl7.jpg",
+   "img/7ymdwpavargn0j6mgi7933nst3ndnphc.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugo324lok_soed345initelnyy_tecespring_ax/"
+ },
+ "767501S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767516S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767520S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767525S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767526S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767532S": {
+  "title": "Уголок соединительный TECEspring AX с ниппелем",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/r3ueuy21o36zx47kk7kul3ze2qffoqm0.jpg",
+   "img/gwgeghf6rw3o5tutpsb7uxhk5lrp820b.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinit34%D0%B5435elnyy_tecespring_ax_s_nippelem/"
+ },
+ "767570S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767572S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767573S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767574S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767575S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767578S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "767581S": {
+  "title": "Соединение прямое TECEspring AX с накидной гайкой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/pyugwdezmkax7r0wk7vfcno54niul53i.jpg",
+   "img/sk3masu8z48do2bn5e5ic1fjvmpskzsp.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/soedinen453ie_pryamoe_teces345pring_ax_s_nakidnoy_gaykoy/"
+ },
+ "768002S": {
+  "title": "Уголок соединительный TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xtce2xblmlmna3banbh9peoj3ynii5su.jpg",
+   "img/r46vivmyl3m8z5p9mp1tuv8fp9s2e6ex.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinitelnyy_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "768016S": {
+  "title": "Уголок соединительный TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xtce2xblmlmna3banbh9peoj3ynii5su.jpg",
+   "img/r46vivmyl3m8z5p9mp1tuv8fp9s2e6ex.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinitelnyy_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "768020S": {
+  "title": "Уголок соединительный TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xtce2xblmlmna3banbh9peoj3ynii5su.jpg",
+   "img/r46vivmyl3m8z5p9mp1tuv8fp9s2e6ex.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinitelnyy_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "768025S": {
+  "title": "Уголок соединительный TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xtce2xblmlmna3banbh9peoj3ynii5su.jpg",
+   "img/r46vivmyl3m8z5p9mp1tuv8fp9s2e6ex.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinitelnyy_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "768032S": {
+  "title": "Уголок соединительный TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/xtce2xblmlmna3banbh9peoj3ynii5su.jpg",
+   "img/r46vivmyl3m8z5p9mp1tuv8fp9s2e6ex.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_soedinitelnyy_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "768502S": {
+  "title": "Уголок с настенным креплением TECEspring AX, удлиненный",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/futv7getzag0yxtv9x5e10bw4thkqlzf.jpg",
+   "img/pv2kzhvwc123wpu7t2lr6ql89a1n9cqs.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_s_nastenn34563ym_krepleniem_tece22spring_ax_udlinennyy/"
+ },
+ "768503S": {
+  "title": "Уголок с настенным креплением TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/d4fxzbqr3g88czmbn06gcx8kmx4c2il5.jpg",
+   "img/8m0kmd5saqngciw3fc71ljqq7uklea81.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_s_nasten34563nym_krepleni222em_tecespring_ax/"
+ },
+ "768520S": {
+  "title": "Уголок с настенным креплением TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/d4fxzbqr3g88czmbn06gcx8kmx4c2il5.jpg",
+   "img/8m0kmd5saqngciw3fc71ljqq7uklea81.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_s_nasten34563nym_krepleni222em_tecespring_ax/"
+ },
+ "768525S": {
+  "title": "Уголок с настенным креплением TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/d4fxzbqr3g88czmbn06gcx8kmx4c2il5.jpg",
+   "img/8m0kmd5saqngciw3fc71ljqq7uklea81.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_s_nasten34563nym_krepleni222em_tecespring_ax/"
+ },
+ "768526S": {
+  "title": "Уголок с настенным креплением TECEspring AX",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/d4fxzbqr3g88czmbn06gcx8kmx4c2il5.jpg",
+   "img/8m0kmd5saqngciw3fc71ljqq7uklea81.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/ugolok_s_nasten34563nym_krepleni222em_tecespring_ax/"
+ },
+ "768625S": {
+  "title": "Тройник угловой TECEspring AX с настенным креплением, закругленный, с низким падением давления",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/5b9wy6wcmdnkqt5l7feqvb2yzk33uqtw.jpg",
+   "img/t9adpyz3h1k8aofun4wxe7f4690jwlfx.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_uglovoy_tece235235spring_ax_s_nastennym_krepleniem_udlinennyy/"
+ },
+ "769516S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "769520S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "769522S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "769525S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "769527S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "769532S": {
+  "title": "Тройник TECEspring AX с внутренней резьбой",
+  "text": "Стандартная латунь.",
+  "images": [
+   "img/zf5jk7884om7vde62sopz5v0azcj4fkq.jpg",
+   "img/9cverr2qh92m5p2dw2dzaqbgo57cqaf3.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/troynik_tecespring_ax_s_vnutrenney_rezboy/"
+ },
+ "8740439S": {
+  "title": "Концовка разборная TECEspring AX (Евроконус) для присоединения медных трубок",
+  "text": "Концовка разборная для присоединения медных трубок 15 x 1 мм, с никелированной накидной гайкой 3/4\" Евроконус.",
+  "images": [
+   "img/5nt9a7cvp3cpfn5k9zafoumcowij8xnw.jpg",
+   "img/4e7d5dwzsdoq3l2dqrercf80u2wfi1ht.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/kontsovka_razborn56aya_tecespring_ax_evrokon36us_dlya_prisoedineniya_mednykh_trubok/"
+ },
+ "8740440S": {
+  "title": "Ниппель TECEspring AX редукционный 1/2\" x 3/4\" Евроконус",
+  "text": "Никелированный ниппель редукционный 1/2\" x 3/4\" Евроконус для подключения к радиаторам.",
+  "images": [
+   "img/m1rbfjhlw3pvlzm537fjms9v2ema40xc.jpg"
+  ],
+  "docs": [],
+  "url": "https://spring.tececatalog.ru/catalog/nippel_teces3465346pring_ax_redu34535ktsionnyy_1_2_x_3_4_evrokonus/"
+ },
  "9700896": {
   "title": "Крышка-сиденье из дюропласта для подвесного унитаза TECEspring  Model S",
   "text": "Крепления к чаше унитаза в комплекте.",

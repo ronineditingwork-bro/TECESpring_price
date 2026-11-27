@@ -11,19 +11,28 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   const p = await b.newPage({ viewport: { width: 390, height: 844 } });
   const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto(url);
-  const total = await p.evaluate(() => window.PRICE.sections.reduce((n, s) => n + s.items.length, 0));
-  assert.equal(await p.locator('.tile').count(), total);
+  // главный экран — вкладки прайса, внутри вкладки — группы
+  const sheets = await p.evaluate(() => window.PRICE.sheets.map((s) => s.groups.reduce((n, g) => n + g.items.length, 0)));
+  assert.equal(await p.locator('.sheet').count(), sheets.length);
+  const spring = await p.evaluate(() => window.PRICE.sheets.findIndex((s) => s.name === 'ТЕСЕspring сантехника'));
+  await p.click(`a[href="#s=${spring}"]`);
+  await p.waitForSelector('.tile');
+  assert.equal(await p.locator('.tile').count(), sheets[spring]);
+  assert.ok(await p.isVisible('#back'), 'back button inside a price tab');
 
   // остатки: фильтр «Только в наличии» и подпись у товара
-  const inStock = await p.evaluate(() => window.PRICE.sections.flatMap((s) => s.items).filter((i) => window.STOCK.stores.some((s) => s.items[i.sku] > 0)).length);
+  const inStock = await p.evaluate((n) => window.PRICE.sheets[n].groups.flatMap((g) => g.items).filter((i) => window.STOCK.stores.some((s) => s.items[i.sku] > 0)).length, spring);
   await p.check('#in-stock');
   assert.equal(await p.locator('.tile').count(), inStock);
   await p.uncheck('#in-stock');
   assert.match(await p.textContent('a[href="#p=S710001"]'), /Ростов 20\s*Москва 577/);
 
+  // поиск идёт по всем вкладкам
   await p.fill('#q', 'S710001');
   assert.equal(await p.locator('.tile').count(), 1);
   await p.click('[data-add="S710001"]'); await p.click('[data-add="S710001"]');
+  await p.fill('#q', 'заглушка');
+  assert.ok((await p.locator('#list h2').allTextContents()).length > 2, 'search covers several price tabs');
   await p.fill('#q', '');
 
   // карточка товара: фото, описание, добавление в корзину
@@ -36,7 +45,10 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.screenshot({ path: shot('card'), fullPage: true });
   await p.click('#back'); // кнопка «Назад» в шапке возвращает на предыдущий экран
   await p.waitForSelector('#catalog', { state: 'visible' });
-  assert.ok(!(await p.isVisible('#back')), 'no back button on the catalog');
+  assert.ok(await p.isVisible('.tile'), 'back from a card returns to its price tab');
+  await p.click('#back');
+  await p.waitForSelector('.sheet');
+  assert.ok(!(await p.isVisible('#back')), 'no back button on the home screen');
 
   await p.click('#nav-cart');
   await p.waitForSelector('#cart', { state: 'visible' });
