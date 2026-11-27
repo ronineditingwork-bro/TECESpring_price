@@ -5,6 +5,7 @@
 Нужен Pillow: pip install pillow
 """
 import sys
+import time
 from pathlib import Path
 
 from PIL import Image
@@ -40,8 +41,10 @@ def main():
     missing = [p for p in used if not (WWW / p).exists()]
     assert not missing, f"Каталог ссылается на несуществующие файлы: {missing[:5]}"
     removed = 0
+    fresh = time.time() - 6 * 3600
     for f in (WWW / "img").iterdir():
-        if f"img/{f.name}" not in used:
+        # свежие файлы не трогаем: их мог скачать идущий сейчас сбор фото, который ещё не записал каталог
+        if f"img/{f.name}" not in used and f.stat().st_mtime < fresh:
             saved += f.stat().st_size
             f.unlink()
             removed += 1
