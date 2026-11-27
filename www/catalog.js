@@ -35695,5 +35695,56 @@ window.CATALOG = {
   ],
   "docs": [],
   "url": "https://www.bwt.ru/product/id-264-infinity-a-model_6112/"
+ },
+ "10258/016": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-d52-bwt infinity ap dr.webp",
+   "img/bwt-35e-bwt infinity ap dr 6.webp",
+   "img/bwt-86b-bwt infinity ap dr 3.webp",
+   "img/bwt-4d0-bwt infinity ap dr 7.webp",
+   "img/bwt-11b-bwt infinity ap dr 9.webp",
+   "img/bwt-137-bwt infinity ap dr 10.webp"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-infinity-ap-dr/"
+ },
+ "10305/012": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-66f-bwt infinity m.webp",
+   "img/bwt-508-bwt infinity m 6.webp",
+   "img/bwt-2ed-bwt infinity m 3.webp",
+   "img/bwt-4af-bwt infinity m 7.webp",
+   "img/bwt-d3f-bwt infinity m 8.webp",
+   "img/bwt-9b6-bwt infinity m 4.webp"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-infinity-m-1/"
+ },
+ "125639938M": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-8d4-bwt guardian mini hr.webp",
+   "img/bwt-934-bwt guardian mini hr 3.webp",
+   "img/bwt-3ad-bwt guardian mini hr 10.webp",
+   "img/bwt-b21-bwt guardian mini hr 8.webp",
+   "img/bwt-294-bwt guardian mini hr 2.webp",
+   "img/bwt-1cb-bwt guardian mini hr 4.webp"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-mekhanicheskiy-povorotnyy-filtr-dlya-kholodnoy-i-goryachey-vody-guardian-mini-s-radialnym-manometrom/"
+ },
+ "125691704": {
+  "title": "",
+  "text": "",
+  "images": [
+   "img/bwt-f83-risunok1.webp"
+  ],
+  "docs": [],
+  "url": "https://www.bwt.ru/product/id-264-rabochee-naimenovanie-125691704-guardian-filterelement-filtruyushchiy-element/"
  }
 };

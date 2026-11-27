@@ -41,6 +41,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # пока GitHub Pages не включены (Settings → Pages → Source: GitHub Actions), публикация падает;
+    # сборка APK от этого не зависит, поэтому не помечаем весь запуск проваленным и не шлём письма
+    continue-on-error: true
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
