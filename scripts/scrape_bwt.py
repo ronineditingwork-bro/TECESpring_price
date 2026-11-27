@@ -4,6 +4,7 @@
         python scripts/scrape_bwt.py --catalog  — обход всего каталога bwt.ru, для того, что поиск не нашёл
 Дописывает www/catalog.js; позиции, у которых фото уже есть, не трогает.
 """
+import hashlib
 import html
 import json
 import re
@@ -42,7 +43,9 @@ def download(page):
     files = []
     for src in gallery(page):
         # имена вроде IMG_6907.png повторяются у разных товаров — добавляем папку из пути
-        f = WWW / "img" / ("bwt-" + re.search(r"iblock/(\w+)/", src).group(1) + "-" + Path(src).name.lower())
+        # имя только латиницей: файлы с кириллицей и пробелами сборка Android не кладёт в APK
+        name = Path(urllib.parse.unquote(src)).name
+        f = WWW / "img" / f"bwt-{re.search(r'iblock/(\w+)/', src).group(1)}-{hashlib.md5(name.encode()).hexdigest()[:10]}{Path(name).suffix.lower()}"
         if not f.exists():
             try:
                 f.write_bytes(get(BASE + urllib.parse.quote(src, safe="/%"), binary=True))

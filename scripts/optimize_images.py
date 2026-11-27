@@ -4,6 +4,7 @@
 Запускать после скриптов сбора фото: они качают оригиналы (бывают по 2–3 МБ), а в APK всё это попадает целиком.
 Нужен Pillow: pip install pillow
 """
+import re
 import sys
 import time
 from pathlib import Path
@@ -40,6 +41,8 @@ def main():
     used = {p for e in catalog.values() for p in e["images"]}
     missing = [p for p in used if not (WWW / p).exists()]
     assert not missing, f"Каталог ссылается на несуществующие файлы: {missing[:5]}"
+    odd = [p for p in used if not re.fullmatch(r"img/[a-z0-9._-]+", p)]
+    assert not odd, f"Имена фото не латиницей (сборка Android их пропустит): {odd[:5]}"
     removed = 0
     fresh = time.time() - 6 * 3600
     for f in (WWW / "img").iterdir():
