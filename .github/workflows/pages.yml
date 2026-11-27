@@ -21,6 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: node --check www/app.js && node --test tests/docs.test.js
+      - name: Drop photos the catalog does not use
+        # scrapers download originals first; only photos referenced by catalog.js go into the APK and the site
+        run: node -e 'global.window={};require("./www/catalog.js");const fs=require("fs");const used=new Set(Object.values(window.CATALOG).flatMap(c=>c.images.map(f=>f.slice(4))));for(const f of fs.readdirSync("www/img"))if(!used.has(f))fs.unlinkSync("www/img/"+f)'
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: gradle/actions/setup-gradle@v4
