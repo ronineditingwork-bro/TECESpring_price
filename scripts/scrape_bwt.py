@@ -1,8 +1,10 @@
 """Фото для вкладки BWT с bwt.ru: поиск по артикулу → страница товара → фото галереи (470×470).
 
-Запуск: python scripts/scrape_bwt.py
+Запуск: python scripts/scrape_bwt.py            — поиск по артикулу
+        python scripts/scrape_bwt.py --catalog  — обход всего каталога bwt.ru, для того, что поиск не нашёл
 Дописывает www/catalog.js; позиции, у которых фото уже есть, не трогает.
 """
+import html
 import json
 import re
 import sys
@@ -36,36 +38,83 @@ def gallery(page):
     return shots
 
 
-def main():
+def download(page):
+    files = []
+    for src in gallery(page):
+        # имена вроде IMG_6907.png повторяются у разных товаров — добавляем папку из пути
+        f = WWW / "img" / ("bwt-" + re.search(r"iblock/(\w+)/", src).group(1) + "-" + Path(src).name.lower())
+        if not f.exists():
+            try:
+                f.write_bytes(get(BASE + urllib.parse.quote(src, safe="/%"), binary=True))
+            except Exception as e:
+                print(f"  ! {src}: {e}")
+                continue
+            time.sleep(0.2)
+        files.append(f"img/{f.name}")
+    return files[:6]
+
+
+def from_search(missing, new):
+    for sku in missing:
+        link = find_product(sku)
+        time.sleep(0.3)
+        if link:
+            files = download(get(BASE + link))
+            if files:
+                new[sku] = {"title": "", "text": "", "images": files, "docs": [], "url": BASE + link}
+                if len(new) % 20 == 0:
+                    save(new)  # обход долгий — сохраняем по ходу, чтобы обрыв не терял найденное
+
+
+def from_catalog(missing, new):
+    """Обходит каталог (для частных и юридических лиц) и ищет артикулы на страницах товаров."""
+    queue = [f"/catalog/?visitor_type={v}" for v in ("fiz", "yur")]
+    seen, products = set(), set()
+    while queue and len(seen) < 600:  # shortcut: не больше 600 страниц каталога; хватает на весь bwt.ru сейчас
+        url = queue.pop(0)
+        if url in seen:
+            continue
+        seen.add(url)
+        try:
+            page = get(BASE + url)
+        except Exception as e:
+            print(f"  ! {url}: {e}")
+            continue
+        time.sleep(0.3)
+        products.update(re.findall(r'href="(/product/[^"?#]+)', page))
+        queue += [html.unescape(u) for u in re.findall(r'href="(/catalog/[^"#]*(?:visitor_type|PAGEN)[^"#]*)"', page)]
+    print(f"каталог: {len(seen)} страниц, {len(products)} товаров")
+    left = set(missing)
+    for link in sorted(products):
+        if not left:
+            break
+        try:
+            page = get(BASE + link)
+        except Exception as e:
+            print(f"  ! {link}: {e}")
+            continue
+        time.sleep(0.3)
+        text = re.sub(r"<[^>]+>", " ", page)
+        for sku in [k for k in left if re.search(r"(?<![\w-])" + re.escape(k) + r"(?![\w-])", text)]:
+            files = download(page)
+            if files:
+                new[sku] = {"title": "", "text": "", "images": files, "docs": [], "url": BASE + link}
+                left.discard(sku)
+        if len(new) and len(new) % 20 == 0:
+            save(new)
+
+
+def main(mode="search"):
     price = load("price.js")
     wanted = [i["sku"] for s in price["sheets"] if s["name"] == "BWT" for g in s["groups"] for i in g["items"]]
     catalog = load("catalog.js")
-    added, new = 0, {}
-    for sku in wanted:
-        if catalog.get(sku, {}).get("images"):
-            continue
-        link = find_product(sku)
-        time.sleep(0.3)
-        if not link:
-            continue
-        page = get(BASE + link)
-        files = []
-        for src in gallery(page):
-            # имена вроде IMG_6907.png повторяются у разных товаров — добавляем папку из пути
-            f = WWW / "img" / ("bwt-" + re.search(r"iblock/(\w+)/", src).group(1) + "-" + Path(src).name.lower())
-            if not f.exists():
-                f.write_bytes(get(BASE + urllib.parse.quote(src, safe="/%"), binary=True))
-                time.sleep(0.2)
-            files.append(f"img/{f.name}")
-        if files:
-            new[sku] = {"title": "", "text": "", "images": files[:6], "docs": [], "url": BASE + link}
-            added += 1
-            if added % 20 == 0:
-                save(new)  # обход долгий — сохраняем по ходу, чтобы обрыв не терял найденное
+    missing = [k for k in wanted if not catalog.get(k, {}).get("images")]
+    new = {}
+    (from_catalog if mode == "--catalog" else from_search)(missing, new)
     catalog = save(new)
     missing = [k for k in wanted if not catalog.get(k, {}).get("images")]
-    print(f"BWT: фото добавлено для {added}; без фото {len(missing)} из {len(wanted)}")
+    print(f"BWT: фото добавлено для {len(new)}; без фото {len(missing)} из {len(wanted)}")
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:2])
