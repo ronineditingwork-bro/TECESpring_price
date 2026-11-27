@@ -132,6 +132,8 @@ def read(name):
         items[sku] = {
             "item": {"sku": sku, "name": nm, "unit": "шт", "eur": number(r[ci["РРЦ ЕВРО"]]) if ci["РРЦ ЕВРО"] is not None else None,
                      "rub": round(price, 2), "sub": clean(r[sub_col]) if sub_col is not None else "", "group": group},
+            # у KK POL второй код в скобках («SPP/105/0/K (350/PPB/097-00-00)») — по нему фото в AMANA_Site
+            "codes": [sku] + re.findall(r"[\w.\-]+/[\w.\-]+/[\w.\-/]+", r[ci["Артикул"]] + " " + r[ci["Наименование"]]),
             "photos": [p for p in photos if is_url(p, r"\.(jpe?g|png|webp)(\?|$)")],
             "card": {"title": "", "text": text, "docs": docs, "specs": specs,
                      "url": r[ci["Ссылка на сайт"]].strip() if ci["Ссылка на сайт"] is not None and is_url(r[ci["Ссылка на сайт"]].strip()) else ""},
@@ -162,7 +164,7 @@ def amana_kkpol(root):
     if not root:
         return {}
     data = json.loads((Path(root) / "site" / "kkpol.json").read_text(encoding="utf-8"))
-    return {p["sku"]: Path(root) / "site" / p["img"] for p in data["products"] if p.get("img")}
+    return {p["sku"]: Path(root) / p["img"] for p in data["products"] if p.get("img")}
 
 
 def main(amana=None):
@@ -177,9 +179,12 @@ def main(amana=None):
         groups = {}
         for it, imgs in zip(items.values(), photos):
             sku = it["item"]["sku"]
-            if not imgs and sku in fallback and fallback[sku].exists():
-                dst = WWW / "img" / f"kkpol-amana-{re.sub(r'[^a-z0-9]+', '-', sku.lower())}{fallback[sku].suffix.lower()}"
-                shutil.copy(fallback[sku], dst)
+            src = next((fallback[c] for c in it["codes"] if c in fallback and fallback[c].exists()), None)
+            if not imgs and src:
+                dst = WWW / "img" / f"kkpol-amana-{src.stem.lower()}.webp"
+                if not dst.exists():
+                    shutil.copy(src, dst.with_suffix(src.suffix.lower()))
+                    dst = dst.with_suffix(src.suffix.lower())
                 imgs = [f"img/{dst.name}"]
             cards[sku] = {**it["card"], "images": imgs}
             groups.setdefault(it["item"].pop("group"), []).append(it["item"])
