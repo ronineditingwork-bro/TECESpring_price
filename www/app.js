@@ -238,6 +238,7 @@ function renderDoc(kind) {
         <div><label class="f" for="docDate">Дата</label><input id="docDate" type="date" value="${new Date().toLocaleDateString("sv")}"></div>
       </div>
       ${kind === "quote" ? `<label class="f" for="valid">Срок действия, дней</label><input id="valid" type="number" inputmode="numeric" min="1" value="${store.get("validDays", 14)}">` : ""}
+      <label class="f" for="discount">Скидка клиенту, %</label><input id="discount" type="number" inputmode="decimal" min="0" max="99" step="0.5" placeholder="0" value="${store.get("discount", "") || ""}">
     </div>
     <div class="panel form">
       ${sw("photos", "Фото товаров", "Картинка у каждой позиции")}
@@ -259,13 +260,14 @@ function renderDoc(kind) {
   });
   view.querySelectorAll('[id^="o_"]').forEach((el) => el.onchange = () => { const o = store.get("docOpts", { photos: true, arts: true }); o[el.id.slice(2)] = el.checked; store.set("docOpts", o); });
   if ($("valid")) $("valid").oninput = () => store.set("validDays", parseInt($("valid").value) || 14);
+  $("discount").oninput = () => store.set("discount", Math.min(Math.max(parseFloat($("discount").value) || 0, 0), 99));
   $("seller").onchange = () => { store.set("seller", +$("seller").value); $("docNo").value = store.get(noKey(+$("seller").value), 1); };
   $("pdfBtn").onclick = () => {
     const i = +$("seller").value, no = parseInt($("docNo").value) || 1, seller = SELLERS[i];
     // фото лежат внутри приложения, поэтому PDF собирается с картинками и без интернета
     const lines = cartLines().map((l) => ({ name: l.name, art: l.sku, qty: l.qty, unit: l.unit, price: l.rub, img: img(l.sku) }));
     const args = { kind, seller, buyer: store.get("buyer", {}), comment: $("b_comment").value.trim(), lines, no,
-      date: $("docDate").value, validDays: $("valid") ? $("valid").value : 0, opts: store.get("docOpts", { photos: true, arts: true }) };
+      date: $("docDate").value, validDays: $("valid") ? $("valid").value : 0, discount: store.get("discount", 0), opts: store.get("docOpts", { photos: true, arts: true }) };
     const name = `${kind === "quote" ? "КП" : "Счёт"} ${no} от ${args.date} ${seller.short}`.replace(/[«»"]/g, "").replace(/[.\s]+$/, "");
     if (window.Android) { $("pdfBtn").disabled = true; $("pdfBtn").textContent = "Создаём PDF…"; window.Android.pdf(buildDoc(args), name); }
     else {

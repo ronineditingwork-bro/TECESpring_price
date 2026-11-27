@@ -94,12 +94,15 @@ const shot = (name) => path.join(os.tmpdir(), `tecespring-${name}.png`);
   await p.goto(url + '#doc/invoice');
   await p.waitForSelector('#doc #seller');
   assert.match(await p.inputValue('#seller'), /\d/);
+  await p.fill('#discount', '10');  // скидка клиенту
   await p.click('#pdfBtn');
   await p.waitForURL(/doc\.html$/); await p.waitForSelector('h1');
   const inv = await p.textContent('body');
   assert.match(inv, /Счёт на оплату№ 1 от/);
   assert.match(inv, /044525593/, 'invoice: bank requisites of the chosen seller');
   assert.match(inv, /Главный бухгалтер/);
+  assert.match(inv, /Скидка 10%/, 'invoice: discount column and total');
+  assert.ok(await p.isVisible('figure.qr svg'), 'invoice: payment QR code');
   await p.screenshot({ path: shot('invoice'), fullPage: true });
 
   // Z Fold 7 разложен: каталог и карточка рядом, складывание возвращает один экран

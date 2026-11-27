@@ -34,9 +34,14 @@ const ruDate = iso => new Date(iso + 'T00:00:00').toLocaleDateString('ru-RU', { 
 // сетка «номер / дата / срок», стороны сделки, таблица позиций на тонких линиях, разбивка НДС, платёжные реквизиты внизу.
 // kind 'invoice' — «Счёт на оплату» (с банковскими реквизитами и главным бухгалтером), 'quote' — «Коммерческое предложение».
 // buyer: { name, inn, kpp, address, phone }; lines: { name, art, qty, unit, price, img }; opts: { photos, arts, toolbar }.
-function buildDoc({ kind = 'invoice', seller, buyer = {}, comment = '', lines, no, date, validDays = 14, opts = {} }) {
+// discount — скидка клиенту в %, на все позиции; НДС, сумма прописью и QR-код считаются от суммы со скидкой.
+function buildDoc({ kind = 'invoice', seller, buyer = {}, comment = '', lines, no, date, validDays = 14, discount = 0, opts = {} }) {
   const e = escHtml, quote = kind === 'quote';
-  const total = lines.reduce((s, l) => s + Math.round(l.qty * l.price * 100) / 100, 0);
+  const d = Math.min(Math.max(+discount || 0, 0), 99.99);
+  const full = (l) => Math.round(l.qty * l.price * 100) / 100;
+  const net = (l) => Math.round(l.qty * l.price * (100 - d)) / 100;  // сумма строки со скидкой, до копеек
+  const gross = lines.reduce((s, l) => s + full(l), 0);
+  const total = Math.round(lines.reduce((s, l) => s + net(l), 0) * 100) / 100;
   const vat = seller.vatRate ? Math.round(total * seller.vatRate / (100 + seller.vatRate) * 100) / 100 : 0;
   const docName = quote ? 'Коммерческое предложение' : 'Счёт на оплату';
   const title = `${docName} № ${e(no)} от ${ruDate(date)}`;
@@ -52,7 +57,9 @@ function buildDoc({ kind = 'invoice', seller, buyer = {}, comment = '', lines, n
     <td>${e(l.name)}</td>
     <td class="r">${l.qty}&nbsp;${e(l.unit || 'шт')}</td>
     <td class="r">${money(l.price)}</td>
-    <td class="r">${money(Math.round(l.qty * l.price * 100) / 100)}</td></tr>`).join('');
+    ${d ? `<td class="r">${String(d).replace('.', ',')}%</td>` : ''}
+    <td class="r">${money(net(l))}</td></tr>`).join('');
+  const purpose = `Оплата по счёту № ${no} от ${ruDate(date)}${seller.vatRate ? `, в том числе НДС ${seller.vatRate}% ${money(vat)} руб.` : ', НДС не облагается.'}`;
   const meta = [quote ? ['Действительно до', ruDate(until.toLocaleDateString('sv'))] : null, ['Валюта', 'RUB, российский рубль'], ['НДС', seller.vatRate ? `${seller.vatRate}%, включён в цены` : 'не облагается']].filter(Boolean);
   const sign = seller.director ? `<div><span>Руководитель</span><i></i><span>${e(seller.director)}</span></div>${quote ? '' : `<div><span>Главный бухгалтер</span><i></i><span>${e(seller.director)}</span></div>`}`
     : `<div><span>Индивидуальный предприниматель</span><i></i><span>${e(seller.short)}</span></div>`;
@@ -86,6 +93,9 @@ function buildDoc({ kind = 'invoice', seller, buyer = {}, comment = '', lines, n
   .tot { display: grid; grid-template-columns: 1fr auto; row-gap: 4px; font-size: 9pt; } .tot dt { padding-right: 16px; } .tot dd { margin: 0; text-align: right; white-space: nowrap; }
   .tot .grand { font-size: 12.5pt; font-weight: 650; padding-top: 8px; margin-top: 4px; border-top: 2px solid #1e2329; }
   .terms, .bank { margin-top: 22px; font-size: 8.5pt; }
+  .pay { display: grid; grid-template-columns: 1fr 150px; gap: 24px; align-items: start; }
+  .qr { margin: 0; text-align: center; } .qr svg { width: 150px; height: 150px; display: block; }
+  .qr figcaption { font-size: 7pt; color: #6a7380; margin-top: 4px; line-height: 1.3; }
   .bank dl { display: grid; grid-template-columns: 130px 1fr 130px 1fr; gap: 4px 12px; margin: 0; } .bank dt { color: #6a7380; } .bank dd { margin: 0; }
   .sign { margin-top: 34px; display: grid; gap: 18px; font-size: 9pt; }
   .sign div { display: grid; grid-template-columns: 200px 180px auto; gap: 12px; align-items: end; } .sign i { border-bottom: 1px solid #1e2329; height: 14px; }
@@ -108,24 +118,52 @@ function buildDoc({ kind = 'invoice', seller, buyer = {}, comment = '', lines, n
   <section><h2>${quote ? 'Для' : 'Покупатель'}</h2><div>${buyerLines}</div></section>
 </div>
 ${comment ? `<div class="comment">${e(comment).replace(/\n/g, '<br>')}</div>` : ''}
-<table class="items"><thead><tr><th class="c">№</th>${opts.photos ? '<th></th>' : ''}${opts.arts ? '<th>Артикул</th>' : ''}<th>Наименование</th><th class="r">Кол-во</th><th class="r">Цена, ₽</th><th class="r">Сумма, ₽</th></tr></thead>
+<table class="items"><thead><tr><th class="c">№</th>${opts.photos ? '<th></th>' : ''}${opts.arts ? '<th>Артикул</th>' : ''}<th>Наименование</th><th class="r">Кол-во</th><th class="r">Цена, ₽</th>${d ? '<th class="r">Скидка</th>' : ''}<th class="r">Сумма, ₽</th></tr></thead>
 <tbody>${rows}</tbody></table>
 <div class="sum">
   <div class="words muted">Всего наименований ${lines.length}, на сумму ${money(total)} руб.<b>${rubToWords(total)}</b></div>
   <dl class="tot">
+    ${d ? `<dt>Сумма без скидки</dt><dd>${money(gross)}</dd><dt>Скидка ${String(d).replace('.', ',')}%</dt><dd>−${money(Math.round((gross - total) * 100) / 100)}</dd>` : ''}
     ${seller.vatRate ? `<dt>Сумма без НДС</dt><dd>${money(total - vat)}</dd><dt>НДС ${seller.vatRate}%</dt><dd>${money(vat)}</dd>` : `<dt>НДС</dt><dd>не облагается</dd>`}
     <dt class="grand">${quote ? 'Итого' : 'Итого к оплате'}, ₽</dt><dd class="grand">${money(total)}</dd>
   </dl>
 </div>
 ${quote ? `<div class="terms"><h2>Условия</h2>Предложение действительно до ${ruDate(until.toLocaleDateString('sv'))} Цены указаны в рублях${seller.vatRate ? ' с НДС' : ''}.</div>`
-  : `<div class="bank"><h2>Платёжные реквизиты</h2><dl>
+  : `<div class="bank"><h2>Платёжные реквизиты</h2><div class="pay"><dl>
     <dt>Получатель</dt><dd>${e(seller.name)}</dd><dt>Банк</dt><dd>${e(seller.bank)}</dd>
     <dt>ИНН / КПП</dt><dd>${e(seller.inn)}${seller.kpp ? ' / ' + e(seller.kpp) : ''}</dd><dt>БИК</dt><dd>${e(seller.bik)}</dd>
     <dt>Расчётный счёт</dt><dd>${e(seller.account)}</dd><dt>Корр. счёт</dt><dd>${e(seller.ks)}</dd>
-  </dl><p class="muted" style="margin:8px 0 0">Назначение платежа: оплата по счёту № ${e(no)} от ${ruDate(date)}${seller.vatRate ? `, в том числе НДС ${seller.vatRate}% ${money(vat)} руб.` : ', НДС не облагается.'}</p></div>`}
+  </dl><figure class="qr">${payQr(seller, total, purpose)}<figcaption>Оплата по QR-коду в приложении банка</figcaption></figure></div>
+  <p class="muted" style="margin:8px 0 0">Назначение платежа: ${e(purpose)}</p></div>`}
 <div class="sign">${sign}</div>
 <div class="foot"><span>${e(seller.name)}, ${req}</span><span>${docName} № ${e(no)}</span></div>
 </body></html>`;
 }
 
-if (typeof module !== 'undefined') module.exports = { rubToWords, buildDoc };
+// Строка платежа по ГОСТ Р 56042-2014. ST00011 — кодировка Windows-1251: русская буква — один байт,
+// поэтому QR-код проще и уверенно читается камерой с листа A4; её понимают приложения российских банков.
+function paymentString(seller, total, purpose) {
+  const clean = (v) => String(v ?? '').replace(/[|\u00a0\u202f]/g, ' ').trim();  // «|» — разделитель полей; неразрывные пробелы из сумм — в обычные
+  return ['ST00011', `Name=${clean(seller.name)}`, `PersonalAcc=${clean(seller.account)}`, `BankName=${clean(seller.bank)}`,
+    `BIC=${clean(seller.bik)}`, `CorrespAcc=${clean(seller.ks)}`, `PayeeINN=${clean(seller.inn)}`,
+    seller.kpp && `KPP=${clean(seller.kpp)}`, `Purpose=${clean(purpose)}`, `Sum=${Math.round(total * 100)}`].filter(Boolean).join('|');
+}
+
+function cp1251(s) {
+  const extra = { 0x401: 0xA8, 0x451: 0xB8, 0x2116: 0xB9, 0xAB: 0xAB, 0xBB: 0xBB, 0x2014: 0x97, 0x2013: 0x96, 0x2212: 0x2D };
+  return Array.from(s, (ch) => {
+    const c = ch.codePointAt(0);
+    return c < 0x80 ? c : c >= 0x410 && c <= 0x44F ? c - 0x350 : extra[c] ?? 0x3F;  // А–я подряд с 0xC0; прочее — «?»
+  });
+}
+
+function payQr(seller, total, purpose) {
+  const lib = typeof qrcode !== 'undefined' ? qrcode : require('./qrcode.js');
+  lib.stringToBytes = cp1251;
+  const qr = lib(0, 'M');
+  qr.addData(paymentString(seller, total, purpose), 'Byte');
+  qr.make();
+  return qr.createSvgTag({ cellSize: 3, margin: 6, scalable: true }); // белое поле вокруг — так QR уверенно читают банковские приложения
+}
+
+if (typeof module !== 'undefined') module.exports = { rubToWords, buildDoc, paymentString, cp1251 };
